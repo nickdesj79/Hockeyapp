@@ -1,10 +1,12 @@
 package com.example.nick.hockeyapp;
 
+import java.io.Serializable;
+
 /**
  * Created by Nick on 2017-01-28.
  */
 
-public class Athlete {
+public class Athlete implements Serializable {
 
     private String fname;
     private String lname;

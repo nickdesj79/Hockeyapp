@@ -18,7 +18,7 @@ public class CompetitionStarted extends AppCompatActivity {
     ArrayList<Athlete> myList;
     ListView listView ;
 
-    
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

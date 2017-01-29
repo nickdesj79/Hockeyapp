@@ -2,6 +2,7 @@ package com.example.nick.hockeyapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
 
         ShowAthleteListAdapter adapter = new ShowAthleteListAdapter(this, R.layout.list_adapter_view,liste);
-        listView = (ListView) findViewById(R.id.listView);
+
         listView.setAdapter(adapter);
 
 
@@ -74,4 +75,41 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
 
     }
+
+    public void startCompetition(View v) {
+        LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.start_competition_alert, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+
+
+
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent i = new Intent(getApplicationContext(), CompetitionStarted.class);
+
+                        i.putExtra("athleteList", liste);
+                        startActivity(i);
+                        finish();
+
+
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
+
 }

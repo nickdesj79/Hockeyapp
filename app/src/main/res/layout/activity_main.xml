@@ -11,25 +11,34 @@
     tools:context="com.example.nick.hockeyapp.MainActivity">
 
 
+    <Button
+        android:text="Add athlete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addathlete"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:onClick="addAthlete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="1600px"
-        android:id="@+id/listView"/>
-
-
+        android:id="@+id/listView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
-        android:text="Add athlete"
+        android:text="Start competition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:id="@+id/addathlete"
+        android:id="@+id/startComp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        android:onClick="addAthlete" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="startCompetition"/>
 </RelativeLayout>
