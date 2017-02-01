@@ -71,7 +71,7 @@ public class CompetitionStarted extends AppCompatActivity {
                 top3AthleteStringList.add("#"+i+"  "+allPlayerList.get(i).toString());
             }
         }
-
+        currentAthlete = upcomingAthlete.get(0);
         upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
         top3athleteView = (ListView) findViewById(R.id.topplayer);
 
@@ -140,5 +140,13 @@ public class CompetitionStarted extends AppCompatActivity {
             }
         });
     }
+
+    public void setPenalty0(){ currentAthlete.setPenalty(0); }
+
+    public void setPenalty1(){ currentAthlete.setPenalty(1); }
+
+    public void setPenalty2(){ currentAthlete.setPenalty(2); }
+
+    public void setPenalty3(){ currentAthlete.setPenalty(3); }
 
 }
