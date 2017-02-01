@@ -35,12 +35,16 @@ public class CompetitionStarted extends AppCompatActivity {
 
     private Athlete currentAthlete;
     double currentTime;
+    private int currentPlayerPosition = 0;
 
     private com.example.nick.hockeyapp.Chronometer chrono;
     private Thread t;
 
     private TextView chronometerView;
     private Context context;
+
+    TextView currentPlayer;
+
 
 
 
@@ -74,7 +78,7 @@ public class CompetitionStarted extends AppCompatActivity {
             if (allPlayerList.get(i) != null) {
                 upcomingAthlete.add(allPlayerList.get(i));
                 upcomingAthleteStringList.add(allPlayerList.get(i).toString());
-                top3AthleteStringList.add("#"+i+"  "+allPlayerList.get(i).toString());
+                top3AthleteStringList.add("#"+(i+1)+"  "+allPlayerList.get(i).toString());
             }
         }
         currentAthlete = upcomingAthlete.get(0);
@@ -92,7 +96,7 @@ public class CompetitionStarted extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 top3AthleteStringList );
 
-        TextView currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+         currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
 
@@ -180,6 +184,33 @@ public class CompetitionStarted extends AppCompatActivity {
         alert.show();
     }
 
+    public void goToNextPlayer() {
+        currentPlayerPosition++;
+        upcomingAthlete = new ArrayList<>();
+        for (int i = currentPlayerPosition; i < currentPlayerPosition +3;i++) {
+            upcomingAthlete.add(allPlayerList.get(i));
+            upcomingAthleteStringList.add(allPlayerList.get(i).toString());
+        }
+        upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
+
+        ArrayAdapter<String> incomingPlayerArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                upcomingAthleteStringList );
+
+        TextView currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        currentPlayer.setText(upcomingAthleteStringList.get(0));
+
+
+
+        upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
+
+        currentAthlete = upcomingAthlete.get(0);
+
+        currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        currentPlayer.setText(upcomingAthleteStringList.get(0));
+    }
+
     public void updateTime(final String time) {
         runOnUiThread(new Runnable() {
 
@@ -190,20 +221,28 @@ public class CompetitionStarted extends AppCompatActivity {
         });
     }
 
-    public void setPenalty0(){
+    public void setPenalty0(View v){
         currentAthlete.setPenalty(0);
+        goToNextPlayer();
     }
 
-    public void setPenalty1(){
+    public void setPenalty1(View v){
         currentAthlete.setPenalty(1);
+        currentAthlete.addTime(30*1000);
+        goToNextPlayer();
+
     }
 
-    public void setPenalty2(){
+    public void setPenalty2(View v){
         currentAthlete.setPenalty(2);
+        currentAthlete.addTime(60*1000);
+        goToNextPlayer();
     }
 
-    public void setPenalty3(){
+    public void setPenalty3(View v){
         currentAthlete.setPenalty(3);
+        currentAthlete.setTotal_time_float(-1);
+        goToNextPlayer();
     }
 
 }

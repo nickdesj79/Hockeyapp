@@ -46,7 +46,7 @@ public class Athlete implements Serializable {
         return total_time_float_in_msec;
     }
 
-    public void setTotal_time_float(float total_time_float) {
+    public void setTotal_time_float(double total_time_float) {
         this.total_time_float_in_msec = total_time_float;
     }
 
