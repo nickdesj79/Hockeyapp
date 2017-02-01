@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.app.AlertDialog;
 
@@ -15,8 +16,18 @@ import java.util.ArrayList;
 
 public class CompetitionStarted extends AppCompatActivity {
 
-    ArrayList<Athlete> myList;
+    ArrayList<Athlete> allPlayerList;
+    ArrayList<String> allPlayerListString;
+
+    ArrayList<Athlete> upcomingAthlete;
+    ArrayList<String> upcomingAthleteStringList;
+
+    ArrayList<Athlete> top3AthleteList;
+    ArrayList<String> top3AthleteStringList;
+
     ListView listView ;
+    ListView upcomingAthleteView;
+    ListView top3athleteView;
 
 
 
@@ -24,8 +35,47 @@ public class CompetitionStarted extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.competetion_started_screen);
 
-        myList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
+        allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
+        allPlayerListString = new ArrayList<>();
 
+        for(int i = 0; i < allPlayerList.size();i++) {
+            allPlayerListString.add(allPlayerList.get(i).toString());
+        }
+
+
+        //initialize initial incoming players lists
+        upcomingAthlete = new ArrayList<>();
+        upcomingAthleteStringList = new ArrayList<>();
+
+        //initialize top 3 players lists
+        top3AthleteList = new ArrayList<>();
+        top3AthleteStringList = new ArrayList<>();
+
+        for (int i = 0; i<3;i++) {
+            if (allPlayerList.get(i) != null) {
+                upcomingAthlete.add(allPlayerList.get(i));
+                upcomingAthleteStringList.add(allPlayerList.get(i).toString());
+                top3AthleteStringList.add("#"+i+"  "+allPlayerList.get(i).toString());
+            }
+        }
+
+        upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
+        top3athleteView = (ListView) findViewById(R.id.topplayer);
+
+        ArrayAdapter<String> incomingPlayerArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                upcomingAthleteStringList );
+
+        //Since there is no top player list on the creation of this view,just take top 3 incoming players.
+        ArrayAdapter<String> top3ArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                top3AthleteStringList );
+
+
+        upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
+        top3athleteView.setAdapter(top3ArrayAdapter);
     }
 
     public void ViewAllPlayer(View v) {
@@ -40,13 +90,15 @@ public class CompetitionStarted extends AppCompatActivity {
 
         listView = (ListView) promptView.findViewById(R.id.allPlayerListView);
 
-        CompetitionAllAthleteAdapter adapter = new CompetitionAllAthleteAdapter(this, R.layout.list_adapter_view_all_athlete,myList);
-
+        ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,allPlayerListString
+                 );
 
         AlertDialog alert = alertDialogBuilder.create();
 
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(allPlayerArrayAdapter);
         alert.show();
     }
 

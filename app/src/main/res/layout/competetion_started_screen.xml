@@ -4,50 +4,73 @@
     android:layout_height="match_parent">
 
 
-    <ListView
-        android:layout_width="1000px"
-        android:layout_height="150px"
-        android:id="@+id/topplayer"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginEnd="30dp" />
-
-    <ListView
-        android:layout_width="700px"
-        android:layout_height="200px"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:id="@+id/upcomingPlayer" />
-
     <Button
         android:text="View all leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/upcomingPlayer"
-        android:layout_alignStart="@+id/upcomingPlayer"
-        android:layout_marginLeft="45dp"
-        android:layout_marginStart="45dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
         android:layout_marginBottom="35dp"
         android:id="@+id/viewallplayerbutton"
-        android:onClick="ViewAllPlayer"/>
+        android:onClick="ViewAllPlayer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/upcomingPlayer"
+        android:layout_alignStart="@+id/upcomingPlayer" />
 
     <Button
         android:text="Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="59dp"
-        android:layout_marginEnd="59dp"
+        android:layout_marginRight="61dp"
+        android:layout_marginEnd="61dp"
         android:id="@+id/nextplayerbutton"
-        android:layout_alignTop="@+id/viewallplayerbutton"
+        android:layout_alignBaseline="@+id/viewallplayerbutton"
+        android:layout_alignBottom="@+id/viewallplayerbutton"
         android:layout_alignRight="@+id/topplayer"
         android:layout_alignEnd="@+id/topplayer" />
+
+    <ListView
+        android:layout_width="700px"
+        android:layout_height="370px"
+        android:id="@+id/topplayer"
+        android:layout_marginTop="69dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="700px"
+        android:layout_height="370px"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:id="@+id/upcomingPlayer"
+        android:layout_alignTop="@+id/topplayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Upcoming players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/upcomingPlayer"
+        android:layout_alignLeft="@+id/upcomingPlayer"
+        android:layout_alignStart="@+id/upcomingPlayer"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/textView"
+        android:textSize="22sp" />
+
+    <TextView
+        android:text="Top 3 players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textSize="22sp"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignLeft="@+id/topplayer"
+        android:layout_alignStart="@+id/topplayer" />
 
 
 </RelativeLayout>

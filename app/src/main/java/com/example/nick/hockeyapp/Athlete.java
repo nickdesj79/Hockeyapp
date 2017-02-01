@@ -12,6 +12,7 @@ public class Athlete implements Serializable {
     private String lname;
     private String country;
     private int number;
+    private float total_time_float = 0;
     private String total_time = "-";
 
     public Athlete(int number, String fname, String lname, String country) {
@@ -39,6 +40,14 @@ public class Athlete implements Serializable {
         return number;
     }
 
+    public float getTotal_time_float() {
+        return total_time_float;
+    }
+
+    public void setTotal_time_float(float total_time_float) {
+        this.total_time_float = total_time_float;
+    }
+
     public String getTotal_time() { return total_time; }
 
     public void setTotal_time(String time) {
@@ -47,6 +56,11 @@ public class Athlete implements Serializable {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public String toString() {
+
+        return number + "  " + fname +"  "+lname + "  "+ country.substring(0,3).toUpperCase() + "  "+total_time;
     }
 
 
