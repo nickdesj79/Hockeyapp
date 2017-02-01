@@ -1,12 +1,15 @@
 package com.example.nick.hockeyapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Chronometer;
 import android.widget.ListView;
 import android.app.AlertDialog;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -29,11 +32,21 @@ public class CompetitionStarted extends AppCompatActivity {
     ListView upcomingAthleteView;
     ListView top3athleteView;
 
+    private com.example.nick.hockeyapp.Chronometer chrono;
+    private Thread t;
+
+    private TextView chronometerView;
+    private Context context;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.competetion_started_screen);
+
+
+        chronometerView = (TextView) findViewById(R.id.chronometer1);
+        context = this;
 
         allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
         allPlayerListString = new ArrayList<>();
@@ -73,9 +86,25 @@ public class CompetitionStarted extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 top3AthleteStringList );
 
+        TextView currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        currentPlayer.setText(upcomingAthleteStringList.get(0));
+
 
         upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
         top3athleteView.setAdapter(top3ArrayAdapter);
+    }
+
+    public void start(View v) {
+
+
+        chrono = new com.example.nick.hockeyapp.Chronometer(context);
+
+
+
+    }
+
+    public void stop(View v) {
+
     }
 
     public void ViewAllPlayer(View v) {
@@ -100,6 +129,16 @@ public class CompetitionStarted extends AppCompatActivity {
 
         listView.setAdapter(allPlayerArrayAdapter);
         alert.show();
+    }
+
+    public void updateTime(final String time) {
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                chronometerView.setText(time);
+            }
+        });
     }
 
 }
