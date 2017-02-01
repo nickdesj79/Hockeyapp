@@ -17,17 +17,7 @@
         android:layout_alignLeft="@+id/upcomingPlayer"
         android:layout_alignStart="@+id/upcomingPlayer" />
 
-    <Button
-        android:text="Next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="61dp"
-        android:layout_marginEnd="61dp"
-        android:id="@+id/nextplayerbutton"
-        android:layout_alignBaseline="@+id/viewallplayerbutton"
-        android:layout_alignBottom="@+id/viewallplayerbutton"
-        android:layout_alignRight="@+id/topplayer"
-        android:layout_alignEnd="@+id/topplayer" />
+
 
     <ListView
         android:layout_width="700px"
@@ -71,6 +61,65 @@
         android:layout_alignBottom="@+id/textView"
         android:layout_alignLeft="@+id/topplayer"
         android:layout_alignStart="@+id/topplayer" />
+
+
+    <Button
+        android:text="Stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stop"
+        android:layout_above="@+id/viewallplayerbutton"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <Button
+        android:text="Start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start"
+        android:layout_marginRight="84dp"
+        android:layout_marginEnd="84dp"
+        android:layout_alignBaseline="@+id/stop"
+        android:layout_alignBottom="@+id/stop"
+        android:layout_toLeftOf="@+id/stop"
+        android:layout_toStartOf="@+id/stop" />
+
+    <TextView
+        android:text="Current Player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="22sp"
+        android:layout_marginBottom="85dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_above="@+id/stop"
+        android:layout_alignLeft="@+id/topplayer"
+        android:layout_alignStart="@+id/topplayer" />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_toRightOf="@+id/upcomingPlayer"
+        android:layout_toEndOf="@+id/upcomingPlayer"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/currentPlayer" />
+
+    <TextView
+        android:text="Timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/start"
+        android:layout_alignRight="@+id/currentPlayer"
+        android:layout_alignEnd="@+id/currentPlayer"
+        android:layout_marginRight="58dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/timer" />
 
 
 </RelativeLayout>
