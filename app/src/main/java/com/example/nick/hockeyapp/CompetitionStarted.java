@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Nick on 2017-01-29.
@@ -211,6 +212,27 @@ public class CompetitionStarted extends AppCompatActivity {
         currentPlayer.setText(upcomingAthleteStringList.get(0));
     }
 
+
+    /*public void algo (ArrayList<Athlete> allPlayerList {
+        Collections.sort(allPlayerList, allPlayerList.get);
+    }*/
+
+
+    /*public void AlgorithmeTri (ArrayList<Athlete> allPlayerList){
+        int temp;
+        int x = allPlayerList.size();
+
+        for(int i = 0; i < allPlayerList.size() - 1; i++) {
+            for(int j = 1; j < allPlayerList.size() - i; j++) {
+                if(allPlayerList[j - 1] > allPlayerList[j]) {
+                    temp = allPlayerList[j -1];
+                    allPlayerList[j - 1] = allPlayerList[j];
+                    allPlayerList[j];
+                }
+            }
+            allPlayerList.
+        }
+    }*/
     public void updateTime(final String time) {
         runOnUiThread(new Runnable() {
 
@@ -246,3 +268,5 @@ public class CompetitionStarted extends AppCompatActivity {
     }
 
 }
+
+
