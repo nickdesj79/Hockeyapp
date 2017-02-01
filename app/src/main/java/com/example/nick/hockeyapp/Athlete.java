@@ -14,12 +14,14 @@ public class Athlete implements Serializable {
     private int number;
     private float total_time_float = 0;
     private String total_time = "-";
+    private int penalty;
 
     public Athlete(int number, String fname, String lname, String country) {
         this.fname = fname;
         this.lname = lname;
         this.country = country;
         this.number = number;
+        this.penalty = 0;
     }
 
     public String getCountry() {
@@ -57,6 +59,13 @@ public class Athlete implements Serializable {
     public void setNumber(int number) {
         this.number = number;
     }
+
+    public int getPenalty(){ return penalty; }
+
+    public void setPenalty(int penalty){ this.penalty = penalty; }
+
+
+
 
     public String toString() {
 
