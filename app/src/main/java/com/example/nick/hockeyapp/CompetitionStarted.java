@@ -32,6 +32,8 @@ public class CompetitionStarted extends AppCompatActivity {
     ListView upcomingAthleteView;
     ListView top3athleteView;
 
+    private Athlete currentAthlete;
+
     private com.example.nick.hockeyapp.Chronometer chrono;
     private Thread t;
 
@@ -96,14 +98,25 @@ public class CompetitionStarted extends AppCompatActivity {
 
     public void start(View v) {
 
-
-        chrono = new com.example.nick.hockeyapp.Chronometer(context);
-
-
+        if(chrono ==  null) {
+            chrono = new com.example.nick.hockeyapp.Chronometer(context);
+            t = new Thread(chrono);
+            t.start();
+            chrono.start();
+        }
 
     }
 
     public void stop(View v) {
+        if(chrono !=  null) {
+            chrono.stop();
+            t.interrupt();
+            t = null;
+            chrono = null;
+        }
+
+
+
 
     }
 
