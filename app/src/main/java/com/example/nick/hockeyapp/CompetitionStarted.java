@@ -1,6 +1,7 @@
 package com.example.nick.hockeyapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -33,12 +34,15 @@ public class CompetitionStarted extends AppCompatActivity {
     ListView top3athleteView;
 
     private Athlete currentAthlete;
+    double currentTime;
 
     private com.example.nick.hockeyapp.Chronometer chrono;
     private Thread t;
 
     private TextView chronometerView;
     private Context context;
+
+
 
 
 
@@ -115,14 +119,46 @@ public class CompetitionStarted extends AppCompatActivity {
             chrono = null;
         }
 
+        String chronoToConcatenated = chronometerView.getText().toString();
 
+        String[] chronoTab = new String[4];
+        chronoTab = chronoToConcatenated.split(":");
+
+        double player_race_time = Integer.parseInt(chronoTab[0])*3600000 + Integer.parseInt(chronoTab[1])*60000 + Integer.parseInt(chronoTab[2])*1000+Integer.parseInt(chronoTab[3]);
+        currentTime = player_race_time;
+
+        currentAthlete.addTime(currentTime);
+
+        showPenaltyAlert();
 
 
     }
 
+    public void showPenaltyAlert() {
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+        final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+
+
+                    }
+                });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
     public void ViewAllPlayer(View v) {
 
-        String x = "";
+
        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
@@ -154,12 +190,20 @@ public class CompetitionStarted extends AppCompatActivity {
         });
     }
 
-    public void setPenalty0(){ currentAthlete.setPenalty(0); }
+    public void setPenalty0(){
+        currentAthlete.setPenalty(0);
+    }
 
-    public void setPenalty1(){ currentAthlete.setPenalty(1); }
+    public void setPenalty1(){
+        currentAthlete.setPenalty(1);
+    }
 
-    public void setPenalty2(){ currentAthlete.setPenalty(2); }
+    public void setPenalty2(){
+        currentAthlete.setPenalty(2);
+    }
 
-    public void setPenalty3(){ currentAthlete.setPenalty(3); }
+    public void setPenalty3(){
+        currentAthlete.setPenalty(3);
+    }
 
 }
