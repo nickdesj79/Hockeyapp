@@ -46,11 +46,6 @@ public class CompetitionStarted extends AppCompatActivity {
 
     TextView currentPlayer;
 
-
-
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.competetion_started_screen);
@@ -185,6 +180,22 @@ public class CompetitionStarted extends AppCompatActivity {
         alert.show();
     }
 
+    public void AlgorithmeTri (ArrayList<Athlete> allPlayerList){
+        Athlete temp;
+        int x = allPlayerList.size();
+
+        for(int i = 0; i < allPlayerList.size() - 1; i++) {
+            for(int j = 1; j < allPlayerList.size() - i; j++) {
+                if(allPlayerList.get(j - 1).getTotal_time_float() > allPlayerList.get(j).getTotal_time_float()) {
+                    temp = allPlayerList.get(j - 1);
+                    allPlayerList.set(j - 1, allPlayerList.get(j));
+                    allPlayerList.set(j, temp);
+                }
+            }
+
+        }
+    }
+
     public void goToNextPlayer() {
         currentPlayerPosition++;
         upcomingAthlete = new ArrayList<>();
@@ -212,27 +223,6 @@ public class CompetitionStarted extends AppCompatActivity {
         currentPlayer.setText(upcomingAthleteStringList.get(0));
     }
 
-
-    /*public void algo (ArrayList<Athlete> allPlayerList {
-        Collections.sort(allPlayerList, allPlayerList.get);
-    }*/
-
-
-    /*public void AlgorithmeTri (ArrayList<Athlete> allPlayerList){
-        int temp;
-        int x = allPlayerList.size();
-
-        for(int i = 0; i < allPlayerList.size() - 1; i++) {
-            for(int j = 1; j < allPlayerList.size() - i; j++) {
-                if(allPlayerList[j - 1] > allPlayerList[j]) {
-                    temp = allPlayerList[j -1];
-                    allPlayerList[j - 1] = allPlayerList[j];
-                    allPlayerList[j];
-                }
-            }
-            allPlayerList.
-        }
-    }*/
     public void updateTime(final String time) {
         runOnUiThread(new Runnable() {
 
