@@ -189,11 +189,11 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         Athlete temp;
         int x = allPlayerList.size();
 
-        for(int i = 0; i < allPlayerList.size() - 1; i++) {
-            for(int j = 1; j < allPlayerList.size() - i; j++) {
-                if(allPlayerList.get(j - 1).getTimeWithPenalty() > allPlayerList.get(j).getTimeWithPenalty() || allPlayerList.get(j - 1).getTimeWithPenalty() == 0) {
-                    temp = allPlayerList.get(j - 1);
-                    allPlayerList.set(j - 1, allPlayerList.get(j));
+        for(int i = allPlayerList.size() - 1; i < 1; i++) {
+            for(int j = 0; j < i-1; j++) {
+                if(allPlayerList.get(j + 1).getTimeWithPenalty() < allPlayerList.get(j).getTimeWithPenalty() && allPlayerList.get(j + 1).getTimeWithPenalty() != 0) {
+                    temp = allPlayerList.get(j + 1);
+                    allPlayerList.set(j + 1, allPlayerList.get(j));
                     allPlayerList.set(j, temp);
                 }
             }
