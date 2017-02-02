@@ -74,7 +74,7 @@ public class CompetitionStarted extends AppCompatActivity {
             if (allPlayerList.get(i) != null) {
                 upcomingAthlete.add(allPlayerList.get(i));
                 upcomingAthleteStringList.add(allPlayerList.get(i).toString());
-                top3AthleteStringList.add("#"+(i+1)+"  "+allPlayerList.get(i).toString());
+                top3AthleteStringList.add("#"+i+"  "+allPlayerList.get(i).toString());
             }
         }
         currentAthlete = upcomingAthlete.get(0);
@@ -92,7 +92,7 @@ public class CompetitionStarted extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 top3AthleteStringList );
 
-         currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        TextView currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
 
@@ -233,29 +233,24 @@ public class CompetitionStarted extends AppCompatActivity {
         });
     }
 
-    public void setPenalty0(View v){
-        currentAthlete.setPenalty(0);
-        goToNextPlayer();
-    }
 
-    public void setPenalty1(View v){
-        currentAthlete.setPenalty(1);
-        currentAthlete.addTime(30*1000);
-        goToNextPlayer();
+    public void addPenalty(View v){
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+        final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
+       TextView w = ((TextView)promptView.findViewById(R.id.penaltyText));
+        TextView s = (TextView) promptView.findViewById(R.id.nomPenalty);
+        s.append("Mange La Bien");
+        int x = Integer.parseInt(w.getText().toString());
+        x++;
+        w.setText(x + "sucemoi");
 
-    }
+    public void removePenalty(View v){
+        TextView w = (TextView) v.findViewById(R.id.penaltyText);
+        int x = Integer.parseInt(w.getText().toString());
+        if(x > 0)
+            x--;
+        w.setText(Integer.toString(x));
 
-    public void setPenalty2(View v){
-        currentAthlete.setPenalty(2);
-        currentAthlete.addTime(60*1000);
-        goToNextPlayer();
-    }
-
-    public void setPenalty3(View v){
-        currentAthlete.setPenalty(3);
-        currentAthlete.setTotal_time_float(-1);
-        goToNextPlayer();
-    }
 
 }
 
