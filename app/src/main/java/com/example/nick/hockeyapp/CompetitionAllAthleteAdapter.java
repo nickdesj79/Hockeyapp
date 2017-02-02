@@ -39,10 +39,10 @@ public class CompetitionAllAthleteAdapter extends ArrayAdapter<Athlete> {
         TextView country = (TextView) convertView.findViewById(R.id.country);
         TextView totaltime = (TextView) convertView.findViewById(R.id.totaltime);
 
-        number.setText(""+athlete.getNumber());
-        name.setText(athlete.getFname().substring(0,1) + "."+athlete.getLname());
+        number.setText(""+athlete.getDossard());
+        name.setText(athlete.getFirstName().substring(0,1) + "."+athlete.getLastName());
         country.setText(athlete.getCountry());
-        totaltime.setText(athlete.getTotal_time());
+        totaltime.setText("" + athlete.getTimeWithPenalty());
 
         return convertView;
     }

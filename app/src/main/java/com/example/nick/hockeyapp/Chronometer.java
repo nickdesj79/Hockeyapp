@@ -40,7 +40,7 @@ public class Chronometer implements Runnable {
             int hours = (int) ((since/MILLIS_TO_HOURS)%24);
             int millis = (int) since%1000;
 
-            ((CompetitionStarted)context).updateTime(String.format("%02d:%02d:%02d:%03d",hours,minutes,seconds,millis));
+            ((CompetitionStartedActivity)context).updateTime(String.format("%02d:%02d:%02d:%03d",hours,minutes,seconds,millis));
 
         }
     }

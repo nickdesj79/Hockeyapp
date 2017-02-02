@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".CompetitionStarted"></activity>
+        <activity android:name=".CompetitionStartedActivity"></activity>
     </application>
 
 </manifest>

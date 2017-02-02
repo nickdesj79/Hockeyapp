@@ -7,19 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Chronometer;
 import android.widget.ListView;
 import android.app.AlertDialog;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by Nick on 2017-01-29.
  */
 
-public class CompetitionStarted extends AppCompatActivity {
+public class CompetitionStartedActivity extends AppCompatActivity {
 
     ArrayList<Athlete> allPlayerList;
     ArrayList<String> allPlayerListString;
@@ -135,9 +133,9 @@ public class CompetitionStarted extends AppCompatActivity {
     }
 
     public void showPenaltyAlert() {
-        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
         alertDialogBuilder.setView(promptView);
 
 
@@ -146,17 +144,11 @@ public class CompetitionStarted extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+                        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
                         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
                         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
                         int x = Integer.parseInt(w.getText().toString());
-
-                        if(x > 2) {
-                            currentAthlete.setTotal_time_float(-1);
-                        } else {
-                            currentAthlete.addTime(x * 30000);
-                        }
-
+                        currentAthlete.setPenalty(x);
 
                         goToNextPlayer();
 
@@ -171,9 +163,9 @@ public class CompetitionStarted extends AppCompatActivity {
     public void ViewAllPlayer(View v) {
 
 
-       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
+       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
 
-        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
 
         alertDialogBuilder.setView(promptView);
@@ -198,7 +190,7 @@ public class CompetitionStarted extends AppCompatActivity {
 
         for(int i = 0; i < allPlayerList.size() - 1; i++) {
             for(int j = 1; j < allPlayerList.size() - i; j++) {
-                if(allPlayerList.get(j - 1).getTotal_time_float() > allPlayerList.get(j).getTotal_time_float()) {
+                if(allPlayerList.get(j - 1).getTimeWithPenalty() > allPlayerList.get(j).getTimeWithPenalty()) {
                     temp = allPlayerList.get(j - 1);
                     allPlayerList.set(j - 1, allPlayerList.get(j));
                     allPlayerList.set(j, temp);
@@ -247,7 +239,7 @@ public class CompetitionStarted extends AppCompatActivity {
 
 
     public void addPenalty(View v) {
-        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
         int x = Integer.parseInt(w.getText().toString());

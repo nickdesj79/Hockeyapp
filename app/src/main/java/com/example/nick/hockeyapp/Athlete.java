@@ -8,19 +8,20 @@ import java.io.Serializable;
 
 public class Athlete implements Serializable {
 
-    private String fname;
-    private String lname;
+    private String firstName;
+    private String lastName;
     private String country;
-    private int number;
-    private double total_time_float_in_msec = 0;
+    private int dossard;
+    private double timeNoPenalty = 0;
     private String total_time = "-";
     private int penalty;
+    private boolean disqualified = false;
 
     public Athlete(int number, String fname, String lname, String country) {
-        this.fname = fname;
-        this.lname = lname;
+        this.firstName = fname;
+        this.lastName = lname;
         this.country = country;
-        this.number = number;
+        this.dossard = number;
         this.penalty = 0;
     }
 
@@ -28,52 +29,59 @@ public class Athlete implements Serializable {
         return country;
     }
 
-
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public int getNumber() {
-        return number;
+    public int getDossard() {
+        return dossard;
     }
 
-    public double getTotal_time_float() {
-        return total_time_float_in_msec;
+    public double getTimeNoPenalty() {
+        return timeNoPenalty;
     }
 
-    public void setTotal_time_float(double total_time_float) {
-        this.total_time_float_in_msec = total_time_float;
+    public double getTimeWithPenalty() {
+        return timeNoPenalty + 30000 * penalty;
     }
 
-    public void addTime(double t) {
-        this.total_time_float_in_msec += t;
+    public boolean getDisqualified() {
+        return disqualified;
     }
 
-    public String getTotal_time() { return total_time; }
-
-    public void setTotal_time(String time) {
-        this.total_time = time;
+    public void setTimeNoPenalty(double time) {
+        this.timeNoPenalty = time;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void addTime(double time) {this.timeNoPenalty += time;}
+
+
+    //public void setTotal_time(String time) {
+    //this.total_time = time;
+    //}
+
+    public void setDossard(int dossard) {
+        this.dossard = dossard;
     }
 
-    public int getPenalty(){ return penalty; }
+    public int getPenalty() {
+        return penalty;
+    }
 
-    public void setPenalty(int penalty){ this.penalty = this.penalty + penalty; }
-
-
-
+    public void setPenalty(int penalty) {
+        if (penalty > 2) {
+            disqualified = true;
+        }
+        this.penalty = penalty;
+    }
 
     public String toString() {
 
-        return number + "  " + fname +"  "+lname + "  "+ country.substring(0,3).toUpperCase() + "  "+total_time;
+        return dossard + "  " + firstName + "  " + lastName + "  " + country.substring(0, 3).toUpperCase() + "  " + timeNoPenalty + 30000 * penalty;
     }
 
 

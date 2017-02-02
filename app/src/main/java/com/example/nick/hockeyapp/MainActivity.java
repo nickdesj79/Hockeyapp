@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Intent i = new Intent(getApplicationContext(), CompetitionStarted.class);
+                        Intent i = new Intent(getApplicationContext(), CompetitionStartedActivity.class);
 
                         i.putExtra("athleteList", liste);
                         startActivity(i);

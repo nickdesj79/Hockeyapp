@@ -41,9 +41,9 @@ public class ShowAthleteListAdapter extends ArrayAdapter<Athlete> {
         TextView lastName = (TextView) convertView.findViewById(R.id.lastName);
         TextView country = (TextView) convertView.findViewById(R.id.country);
 
-        number.setText(""+athlete.getNumber());
-        firstName.setText(athlete.getFname());
-        lastName.setText(athlete.getLname());
+        number.setText(""+athlete.getDossard());
+        firstName.setText(athlete.getFirstName());
+        lastName.setText(athlete.getLastName());
         country.setText(athlete.getCountry());
 
         return convertView;
