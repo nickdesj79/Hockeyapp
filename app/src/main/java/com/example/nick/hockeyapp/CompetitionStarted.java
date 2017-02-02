@@ -28,7 +28,7 @@ public class CompetitionStarted extends AppCompatActivity {
     ArrayList<String> upcomingAthleteStringList;
 
     ArrayList<String> top3AthleteStringList;
-    ArrayList<String> sortedListAllAthlete;
+    ArrayList<Athlete> sortedListAllAthlete;
 
     ListView listView;
     ListView upcomingAthleteView;
@@ -78,11 +78,9 @@ public class CompetitionStarted extends AppCompatActivity {
             }
         }
         //fill top 3 athlete string
-        for(int i = 0; i < allPlayerList.size();i++){
-            sortedListAllAthlete.add("#" + (i + 1) + "  " + allPlayerList.get(i).toString());
-        }
+      sortedListAllAthlete = allPlayerList;
         for(int i = 0; i < 3;i++) {
-            top3AthleteStringList.add(sortedListAllAthlete.get(i));
+            top3AthleteStringList.add(sortedListAllAthlete.get(i).toString());
         }
 
         currentAthlete = upcomingAthlete.get(0);
@@ -157,7 +155,7 @@ public class CompetitionStarted extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+                       /* LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
                         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
                         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
                         int x = Integer.parseInt(w.getText().toString());
@@ -167,7 +165,7 @@ public class CompetitionStarted extends AppCompatActivity {
                         } else {
                             currentAthlete.addTime(x * 30000);
                         }
-
+*/
 
                         goToNextPlayer();
 
@@ -256,7 +254,9 @@ public class CompetitionStarted extends AppCompatActivity {
     }
 
     private void updateTop3View() {
-        //algorithmeTri(sortedListAllAthlete);
+        algorithmeTri(sortedListAllAthlete);
+
+        
     }
 
     private void updateAllLeaderBoardView() {
