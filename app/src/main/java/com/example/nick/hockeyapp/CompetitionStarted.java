@@ -26,8 +26,9 @@ public class CompetitionStarted extends AppCompatActivity {
 
     ArrayList<Athlete> upcomingAthlete;
     ArrayList<String> upcomingAthleteStringList;
-    ArrayList<Athlete> top3AthleteList;
+
     ArrayList<String> top3AthleteStringList;
+    ArrayList<String> sortedListAllAthlete;
 
     ListView listView;
     ListView upcomingAthleteView;
@@ -55,6 +56,7 @@ public class CompetitionStarted extends AppCompatActivity {
 
         allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
         allPlayerListString = new ArrayList<>();
+        sortedListAllAthlete = new ArrayList<>();
 
         for (int i = 0; i < allPlayerList.size(); i++) {
             allPlayerListString.add(allPlayerList.get(i).toString());
@@ -66,16 +68,23 @@ public class CompetitionStarted extends AppCompatActivity {
         upcomingAthleteStringList = new ArrayList<>();
 
         //initialize top 3 players lists
-        top3AthleteList = new ArrayList<>();
         top3AthleteStringList = new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
             if (allPlayerList.get(i) != null) {
                 upcomingAthlete.add(allPlayerList.get(i));
                 upcomingAthleteStringList.add(allPlayerList.get(i).toString());
-                top3AthleteStringList.add("#" + (i + 1) + "  " + allPlayerList.get(i).toString());
+
             }
         }
+        //fill top 3 athlete string
+        for(int i = 0; i < allPlayerList.size();i++){
+            sortedListAllAthlete.add("#" + (i + 1) + "  " + allPlayerList.get(i).toString());
+        }
+        for(int i = 0; i < 3;i++) {
+            top3AthleteStringList.add(sortedListAllAthlete.get(i));
+        }
+
         currentAthlete = upcomingAthlete.get(0);
         upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
         top3athleteView = (ListView) findViewById(R.id.topplayer);
@@ -139,6 +148,9 @@ public class CompetitionStarted extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
         alertDialogBuilder.setView(promptView);
 
+        TextView tv = (TextView)promptView.findViewById(R.id.penaltyText);
+        tv.setText("0");
+
 
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
@@ -191,7 +203,7 @@ public class CompetitionStarted extends AppCompatActivity {
         alert.show();
     }
 
-    public void AlgorithmeTri(ArrayList<Athlete> allPlayerList) {
+    private void algorithmeTri(ArrayList<Athlete> allPlayerList) {
         Athlete temp;
         int x = allPlayerList.size();
 
@@ -240,9 +252,15 @@ public class CompetitionStarted extends AppCompatActivity {
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
         updateAllLeaderBoardView();
+        updateTop3View();
+    }
+
+    private void updateTop3View() {
+        //algorithmeTri(sortedListAllAthlete);
     }
 
     private void updateAllLeaderBoardView() {
+
         allPlayerListString = new ArrayList<>();
 
         for (int i = 0; i < allPlayerList.size(); i++) {

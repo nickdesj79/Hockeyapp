@@ -35,7 +35,7 @@
         android:onClick="addPenalty"/>
 
     <TextView
-        android:text="0"
+
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
