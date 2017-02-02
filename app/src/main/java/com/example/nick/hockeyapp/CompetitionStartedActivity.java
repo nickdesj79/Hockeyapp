@@ -27,7 +27,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     ArrayList<String> upcomingAthleteStringList;
 
     ArrayList<String> top3AthleteStringList;
-    ArrayList<String> sortedListAllAthlete;
+    ArrayList<Athlete> sortedListAllAthlete;
 
     ListView listView;
     ListView upcomingAthleteView;
@@ -59,6 +59,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         for (int i = 0; i < allPlayerList.size(); i++) {
             allPlayerListString.add(allPlayerList.get(i).toString());
+            sortedListAllAthlete.add(allPlayerList.get(i));
         }
 
 
@@ -76,13 +77,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
             }
         }
-        //fill top 3 athlete string
-        for(int i = 0; i < allPlayerList.size();i++){
-            sortedListAllAthlete.add("#" + (i + 1) + "  " + allPlayerList.get(i).toString());
-        }
-        for(int i = 0; i < 3;i++) {
-            top3AthleteStringList.add(sortedListAllAthlete.get(i));
-        }
+
 
         currentAthlete = upcomingAthlete.get(0);
         upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
@@ -93,18 +88,13 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 upcomingAthleteStringList);
 
-        //Since there is no top player list on the creation of this view,just take top 3 incoming players.
-        ArrayAdapter<String> top3ArrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                top3AthleteStringList);
+
 
         TextView currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
 
         upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
-        top3athleteView.setAdapter(top3ArrayAdapter);
     }
 
     public void start(View v) {
@@ -148,6 +138,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         alertDialogBuilder.setView(promptView);
 
         TextView tv = (TextView)promptView.findViewById(R.id.penaltyText);
+        tv.setText("0");
 
 
         // setup a dialog window
@@ -155,17 +146,14 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
+                        /*LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
                         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
-
-
-                        EditText penality = (EditText) promptView.findViewById(R.id.penaltyText);
-                        //TODO: il y a un probleme dans la transformation en int, car le text qu'il recoit est vide.
-                        int nbPenality = Integer.parseInt(penality.getText().toString());
-
-                        currentAthlete.setPenalty(nbPenality);
+                        TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
+                        int x = Integer.parseInt(w.getText().toString());
+                        currentAthlete.setPenalty(x);*/
 
                         goToNextPlayer();
+
                     }
                 });
 
@@ -253,7 +241,29 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     }
 
     private void updateTop3View() {
-        //algorithmeTri(sortedListAllAthlete);
+
+        top3AthleteStringList = new ArrayList<>();
+        algorithmeTri(sortedListAllAthlete);
+
+        int i = 0;
+
+        while(sortedListAllAthlete.get(i).getTimeNoPenalty() == 0) {
+            i++;
+        }
+
+        for(int z = i; z < i+3;z++) {
+            if(z <sortedListAllAthlete.size())
+            top3AthleteStringList.add(sortedListAllAthlete.get(z).toString());
+        }
+
+        //Since there is no top player list on the creation of this view,just take top 3 incoming players.
+        ArrayAdapter<String> top3ArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                top3AthleteStringList);
+
+
+        top3athleteView.setAdapter(top3ArrayAdapter);
     }
 
     private void updateAllLeaderBoardView() {
