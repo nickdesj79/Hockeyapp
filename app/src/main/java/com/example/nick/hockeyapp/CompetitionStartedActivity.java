@@ -234,8 +234,9 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
-        updateAllLeaderBoardView();
+
         updateTop3View();
+        updateAllLeaderBoardView();
     }
 
     private void updateTop3View() {
@@ -263,8 +264,8 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         allPlayerListString = new ArrayList<>();
 
-        for (int i = 0; i < allPlayerList.size(); i++) {
-            allPlayerListString.add(allPlayerList.get(i).toString());
+        for (int i = 0; i < sortedListAllAthlete.size(); i++) {
+            allPlayerListString.add(sortedListAllAthlete.get(i).toString());
         }
     }
 
