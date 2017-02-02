@@ -146,14 +146,13 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        /*LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
-                        final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
+                        //LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
+                        //final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
                         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
                         int x = Integer.parseInt(w.getText().toString());
-                        currentAthlete.setPenalty(x);*/
+                        currentAthlete.setPenalty(x);
 
                         goToNextPlayer();
-
                     }
                 });
 
@@ -192,13 +191,12 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         for(int i = 0; i < allPlayerList.size() - 1; i++) {
             for(int j = 1; j < allPlayerList.size() - i; j++) {
-                if(allPlayerList.get(j - 1).getTimeWithPenalty() > allPlayerList.get(j).getTimeWithPenalty()) {
+                if(allPlayerList.get(j - 1).getTimeWithPenalty() > allPlayerList.get(j).getTimeWithPenalty() || allPlayerList.get(j - 1).getTimeWithPenalty() == 0) {
                     temp = allPlayerList.get(j - 1);
                     allPlayerList.set(j - 1, allPlayerList.get(j));
                     allPlayerList.set(j, temp);
                 }
             }
-
         }
     }
 
@@ -245,15 +243,10 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         top3AthleteStringList = new ArrayList<>();
         algorithmeTri(sortedListAllAthlete);
 
-        int i = 0;
-
-        while(sortedListAllAthlete.get(i).getTimeNoPenalty() == 0) {
-            i++;
-        }
-
-        for(int z = i; z < i+3;z++) {
-            if(z <sortedListAllAthlete.size())
-            top3AthleteStringList.add(sortedListAllAthlete.get(z).toString());
+        for(int z = 0; z < 3;z++) {
+            if(sortedListAllAthlete.get(z).getTimeWithPenalty() != 0) {
+                top3AthleteStringList.add(sortedListAllAthlete.get(z).toString());
+            }
         }
 
         //Since there is no top player list on the creation of this view,just take top 3 incoming players.
