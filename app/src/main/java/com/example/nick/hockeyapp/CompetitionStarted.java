@@ -26,11 +26,10 @@ public class CompetitionStarted extends AppCompatActivity {
 
     ArrayList<Athlete> upcomingAthlete;
     ArrayList<String> upcomingAthleteStringList;
-
     ArrayList<Athlete> top3AthleteList;
     ArrayList<String> top3AthleteStringList;
 
-    ListView listView ;
+    ListView listView;
     ListView upcomingAthleteView;
     ListView top3athleteView;
 
@@ -57,7 +56,7 @@ public class CompetitionStarted extends AppCompatActivity {
         allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
         allPlayerListString = new ArrayList<>();
 
-        for(int i = 0; i < allPlayerList.size();i++) {
+        for (int i = 0; i < allPlayerList.size(); i++) {
             allPlayerListString.add(allPlayerList.get(i).toString());
         }
 
@@ -70,11 +69,11 @@ public class CompetitionStarted extends AppCompatActivity {
         top3AthleteList = new ArrayList<>();
         top3AthleteStringList = new ArrayList<>();
 
-        for (int i = 0; i<3;i++) {
+        for (int i = 0; i < 3; i++) {
             if (allPlayerList.get(i) != null) {
                 upcomingAthlete.add(allPlayerList.get(i));
                 upcomingAthleteStringList.add(allPlayerList.get(i).toString());
-                top3AthleteStringList.add("#"+(i+1)+"  "+allPlayerList.get(i).toString());
+                top3AthleteStringList.add("#" + (i + 1) + "  " + allPlayerList.get(i).toString());
             }
         }
         currentAthlete = upcomingAthlete.get(0);
@@ -84,15 +83,15 @@ public class CompetitionStarted extends AppCompatActivity {
         ArrayAdapter<String> incomingPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
-                upcomingAthleteStringList );
+                upcomingAthleteStringList);
 
         //Since there is no top player list on the creation of this view,just take top 3 incoming players.
         ArrayAdapter<String> top3ArrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
-                top3AthleteStringList );
+                top3AthleteStringList);
 
-        TextView currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        TextView currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
 
@@ -102,7 +101,7 @@ public class CompetitionStarted extends AppCompatActivity {
 
     public void start(View v) {
 
-        if(chrono ==  null) {
+        if (chrono == null) {
             chrono = new com.example.nick.hockeyapp.Chronometer(context);
             t = new Thread(chrono);
             t.start();
@@ -112,7 +111,7 @@ public class CompetitionStarted extends AppCompatActivity {
     }
 
     public void stop(View v) {
-        if(chrono !=  null) {
+        if (chrono != null) {
             chrono.stop();
             t.interrupt();
             t = null;
@@ -124,7 +123,7 @@ public class CompetitionStarted extends AppCompatActivity {
         String[] chronoTab = new String[4];
         chronoTab = chronoToConcatenated.split(":");
 
-        double player_race_time = Integer.parseInt(chronoTab[0])*3600000 + Integer.parseInt(chronoTab[1])*60000 + Integer.parseInt(chronoTab[2])*1000+Integer.parseInt(chronoTab[3]);
+        double player_race_time = Integer.parseInt(chronoTab[0]) * 3600000 + Integer.parseInt(chronoTab[1]) * 60000 + Integer.parseInt(chronoTab[2]) * 1000 + Integer.parseInt(chronoTab[3]);
         currentTime = player_race_time;
 
         currentAthlete.addTime(currentTime);
@@ -151,7 +150,7 @@ public class CompetitionStarted extends AppCompatActivity {
                         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
                         int x = Integer.parseInt(w.getText().toString());
 
-                        if(x > 2) {
+                        if (x > 2) {
                             currentAthlete.setTotal_time_float(-1);
                         } else {
                             currentAthlete.addTime(x * 30000);
@@ -171,7 +170,7 @@ public class CompetitionStarted extends AppCompatActivity {
     public void ViewAllPlayer(View v) {
 
 
-       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStarted.this);
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
         final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
@@ -182,8 +181,8 @@ public class CompetitionStarted extends AppCompatActivity {
 
         ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,allPlayerListString
-                 );
+                android.R.layout.simple_list_item_1, allPlayerListString
+        );
 
         AlertDialog alert = alertDialogBuilder.create();
 
@@ -192,13 +191,13 @@ public class CompetitionStarted extends AppCompatActivity {
         alert.show();
     }
 
-    public void AlgorithmeTri (ArrayList<Athlete> allPlayerList){
+    public void AlgorithmeTri(ArrayList<Athlete> allPlayerList) {
         Athlete temp;
         int x = allPlayerList.size();
 
-        for(int i = 0; i < allPlayerList.size() - 1; i++) {
-            for(int j = 1; j < allPlayerList.size() - i; j++) {
-                if(allPlayerList.get(j - 1).getTotal_time_float() > allPlayerList.get(j).getTotal_time_float()) {
+        for (int i = 0; i < allPlayerList.size() - 1; i++) {
+            for (int j = 1; j < allPlayerList.size() - i; j++) {
+                if (allPlayerList.get(j - 1).getTotal_time_float() > allPlayerList.get(j).getTotal_time_float()) {
                     temp = allPlayerList.get(j - 1);
                     allPlayerList.set(j - 1, allPlayerList.get(j));
                     allPlayerList.set(j, temp);
@@ -209,30 +208,46 @@ public class CompetitionStarted extends AppCompatActivity {
     }
 
     public void goToNextPlayer() {
+
+
+        //Augmente la position du prochaine joueur et update la liste de upcoming players.
         currentPlayerPosition++;
         upcomingAthlete = new ArrayList<>();
-        for (int i = currentPlayerPosition; i < currentPlayerPosition +3;i++) {
+        upcomingAthleteStringList = new ArrayList<>();
+        for (int i = currentPlayerPosition; i < currentPlayerPosition + 3; i++) {
             upcomingAthlete.add(allPlayerList.get(i));
             upcomingAthleteStringList.add(allPlayerList.get(i).toString());
         }
+
         upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
 
         ArrayAdapter<String> incomingPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
-                upcomingAthleteStringList );
+                upcomingAthleteStringList);
+        upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
+        //-----------------------------------------------------------------------------
 
-        TextView currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        //set le textView du nouveau current player pour l'afficher
+        TextView currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
-
-
 
         upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
 
+        //le nouveau current athlete devient le premier de la nouvelle liste.Puis on set sa view.
         currentAthlete = upcomingAthlete.get(0);
-
-        currentPlayer = (TextView)this.findViewById(R.id.currentPlayer);
+        currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
+
+        updateAllLeaderBoardView();
+    }
+
+    private void updateAllLeaderBoardView() {
+        allPlayerListString = new ArrayList<>();
+
+        for (int i = 0; i < allPlayerList.size(); i++) {
+            allPlayerListString.add(allPlayerList.get(i).toString());
+        }
     }
 
     public void updateTime(final String time) {

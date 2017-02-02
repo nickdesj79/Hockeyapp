@@ -54,7 +54,9 @@ public class Athlete implements Serializable {
         this.total_time_float_in_msec += t;
     }
 
-    public String getTotal_time() { return total_time; }
+    public String getTotal_time() {
+        return total_time;
+    }
 
     public void setTotal_time(String time) {
         this.total_time = time;
@@ -64,16 +66,22 @@ public class Athlete implements Serializable {
         this.number = number;
     }
 
-    public int getPenalty(){ return penalty; }
+    public int getPenalty() {
+        return penalty;
+    }
 
-    public void setPenalty(int penalty){ this.penalty = this.penalty + penalty; }
-
-
+    public void setPenalty(int penalty) {
+        this.penalty = this.penalty + penalty;
+    }
 
 
     public String toString() {
 
-        return number + "  " + fname +"  "+lname + "  "+ country.substring(0,3).toUpperCase() + "  "+total_time;
+        int seconds = (int) ((total_time_float_in_msec / 1000) % 60);
+        int minutes = (int) ((total_time_float_in_msec / Chronometer.MILLIS_TO__MINUTES) % 60);
+        int hours = (int) ((total_time_float_in_msec / Chronometer.MILLIS_TO_HOURS) % 24);
+        int millis = (int) total_time_float_in_msec % 1000;
+        return number + "  " + fname + "  " + lname + "  " + country.substring(0, 3).toUpperCase() + "  " + String.format("%02d:%02d:%02d:%03d", hours, minutes, seconds, millis);
     }
 
 
