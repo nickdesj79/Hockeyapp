@@ -12,7 +12,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-
+//TODO: ajouter le bouton "did not finish" si un athlete ne fini pas le parcours.
+//TODO: afficher le classement du dernier athlete qui a passé.
+//TODO: afficher la liste des descentes qui n'ont pas été faites.
+//TODO: permettre d'afficher la liste complete des athletes qui participent.
+//TODO: remettre au premier lorsque tout le monde a fait le parcours.
+//TODO: recevoir les medailles lorsque tout le monde est passé deux fois.
 public class MainActivity extends AppCompatActivity {
 
     ListView listView ;
