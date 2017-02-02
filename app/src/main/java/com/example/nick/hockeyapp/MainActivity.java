@@ -37,24 +37,12 @@ public class MainActivity extends AppCompatActivity {
         Athlete athlete3 = new Athlete(player_number++, "Marc-antoine","Roberge","Japon");
         Athlete athlete4 = new Athlete(player_number++, "Vincent","Pageau","Chine");
         Athlete athlete5 = new Athlete(player_number++, "Marc-antoine","Fortier","Pays-bas");
-        Athlete athlete6 = new Athlete(player_number++, "Vincent","Lamoureux","Pollande");
-        Athlete athlete7 = new Athlete(player_number++, "Frederique","Cardinal","Belgique");
-        Athlete athlete8 = new Athlete(player_number++, "louise","Therien","Mexique");
-        Athlete athlete9 = new Athlete(player_number++, "Kevin","Leroux","Cuba");
-        Athlete athlete10 = new Athlete(player_number++, "Alex","Walsh","Switzertland");
-        Athlete athlete11 = new Athlete(player_number++, "Samuel","Lim","Suisse");
 
         liste.add(athlete);
         liste.add(athlete2);
         liste.add(athlete3);
         liste.add(athlete4);
         liste.add(athlete5);
-        liste.add(athlete6);
-        liste.add(athlete7);
-        liste.add(athlete8);
-        liste.add(athlete9);
-        liste.add(athlete10);
-        liste.add(athlete11);
 
 
 

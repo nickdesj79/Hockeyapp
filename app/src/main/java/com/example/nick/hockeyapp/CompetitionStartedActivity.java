@@ -204,12 +204,22 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
 
         //Augmente la position du prochaine joueur et update la liste de upcoming players.
+        int nextPlayerOutOfBounds = 0;
         currentPlayerPosition++;
+        if(currentPlayerPosition==allPlayerList.size()) {
+            currentPlayerPosition = 0;
+        }
         upcomingAthlete = new ArrayList<>();
         upcomingAthleteStringList = new ArrayList<>();
         for (int i = currentPlayerPosition; i < currentPlayerPosition + 3; i++) {
-            upcomingAthlete.add(allPlayerList.get(i));
-            upcomingAthleteStringList.add(allPlayerList.get(i).toString());
+            if(i+1 > allPlayerList.size()){
+                upcomingAthlete.add(allPlayerList.get(nextPlayerOutOfBounds));
+                upcomingAthleteStringList.add(allPlayerList.get(nextPlayerOutOfBounds).toString());
+                nextPlayerOutOfBounds++;
+            } else {
+                upcomingAthlete.add(allPlayerList.get(i));
+                upcomingAthleteStringList.add(allPlayerList.get(i).toString());
+            }
         }
 
         upcomingAthleteView = (ListView) findViewById(R.id.upcomingPlayer);
