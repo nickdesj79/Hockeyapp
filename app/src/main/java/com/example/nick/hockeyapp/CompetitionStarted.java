@@ -74,7 +74,7 @@ public class CompetitionStarted extends AppCompatActivity {
             if (allPlayerList.get(i) != null) {
                 upcomingAthlete.add(allPlayerList.get(i));
                 upcomingAthleteStringList.add(allPlayerList.get(i).toString());
-                top3AthleteStringList.add("#"+i+"  "+allPlayerList.get(i).toString());
+                top3AthleteStringList.add("#"+(i+1)+"  "+allPlayerList.get(i).toString());
             }
         }
         currentAthlete = upcomingAthlete.get(0);
@@ -146,7 +146,19 @@ public class CompetitionStarted extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+                        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+                        final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
+                        TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
+                        int x = Integer.parseInt(w.getText().toString());
 
+                        if(x > 2) {
+                            currentAthlete.setTotal_time_float(-1);
+                        } else {
+                            currentAthlete.addTime(x * 30000);
+                        }
+
+
+                        goToNextPlayer();
 
                     }
                 });
@@ -234,23 +246,22 @@ public class CompetitionStarted extends AppCompatActivity {
     }
 
 
-    public void addPenalty(View v){
+    public void addPenalty(View v) {
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
-       TextView w = ((TextView)promptView.findViewById(R.id.penaltyText));
-        TextView s = (TextView) promptView.findViewById(R.id.nomPenalty);
-        s.append("Mange La Bien");
+        TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
         int x = Integer.parseInt(w.getText().toString());
         x++;
-        w.setText(x + "sucemoi");
+        w.setText(x + "");
+    }
 
-    public void removePenalty(View v){
+    public void removePenalty(View v) {
         TextView w = (TextView) v.findViewById(R.id.penaltyText);
         int x = Integer.parseInt(w.getText().toString());
-        if(x > 0)
+        if (x > 0)
             x--;
         w.setText(Integer.toString(x));
-
+    }
 
 }
 
