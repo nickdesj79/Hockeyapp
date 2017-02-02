@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
-        android:text="-"
+        android:id="@+id/button1"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        android:onClick="removePenalty"
-        android:layout_marginTop="100dp"
-        android:layout_below="@+id/nomPenalty"
         android:layout_alignLeft="@+id/nomPenalty"
-         />
+        android:layout_below="@+id/nomPenalty"
+        android:layout_marginTop="100dp"
+        android:onClick="removePenalty"
+        android:text="-" />
 
     <TextView
-        android:text="Combien de pénalités @id a-t'il eu durant cette descente"
-        android:layout_height="wrap_content"
         android:id="@+id/nomPenalty"
         android:layout_width="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Combien de pénalités a-t'il eu durant cette descente" />
 
     <Button
-        android:text="+"
+        android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button5"
         android:layout_alignBaseline="@+id/button1"
         android:layout_alignBottom="@+id/button1"
-        android:layout_alignRight="@+id/nomPenalty"
         android:layout_alignEnd="@+id/nomPenalty"
-        android:onClick="addPenalty"/>
+        android:layout_alignRight="@+id/nomPenalty"
+        android:onClick="addPenalty"
+        android:text="+" />
 
-    <TextView
-
-        android:textSize="22sp"
+    <EditText
+        android:id="@+id/penaltyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nomPenalty"
+        android:layout_above="@+id/button5"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:id="@+id/penaltyText" />
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="Nombre de pénalités"
+        android:inputType="phone" />
+
 
 </RelativeLayout>

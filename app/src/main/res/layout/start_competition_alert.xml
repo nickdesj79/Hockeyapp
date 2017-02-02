@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:text="Once the competition has started,
-        you won't be enable to add any more player.
-         Are you sure to continue ?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.10"
         android:layout_centerHorizontal="true"
+        android:layout_weight="0.10"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:text="Once the competition has started, you won't be enable to add any more player. Are you sure to continue ?"
+        android:textSize="20sp" />
 
 </LinearLayout>

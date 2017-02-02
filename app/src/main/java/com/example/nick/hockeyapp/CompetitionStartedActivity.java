@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.app.AlertDialog;
 import android.widget.TextView;
@@ -147,7 +148,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         alertDialogBuilder.setView(promptView);
 
         TextView tv = (TextView)promptView.findViewById(R.id.penaltyText);
-        tv.setText("0");
 
 
         // setup a dialog window
@@ -157,12 +157,15 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
                         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
                         final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
-                        TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
-                        int x = Integer.parseInt(w.getText().toString());
-                        currentAthlete.setPenalty(x);
+
+
+                        EditText penality = (EditText) promptView.findViewById(R.id.penaltyText);
+                        //TODO: il y a un probleme dans la transformation en int, car le text qu'il recoit est vide.
+                        int nbPenality = Integer.parseInt(penality.getText().toString());
+
+                        currentAthlete.setPenalty(nbPenality);
 
                         goToNextPlayer();
-
                     }
                 });
 
@@ -174,7 +177,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     public void ViewAllPlayer(View v) {
 
 
-       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this)
+       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
