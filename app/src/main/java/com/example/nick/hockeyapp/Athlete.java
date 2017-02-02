@@ -81,7 +81,12 @@ public class Athlete implements Serializable {
 
     public String toString() {
 
-        return dossard + "  " + firstName + "  " + lastName + "  " + country.substring(0, 3).toUpperCase() + "  " + timeNoPenalty + 30000 * penalty;
+        int seconds = (int)((timeNoPenalty / 1000)%60);
+        int minutes = (int) ((timeNoPenalty/Chronometer.MILLIS_TO__MINUTES)%60);
+        int hours = (int) ((timeNoPenalty/Chronometer.MILLIS_TO_HOURS)%24);
+        int millis = (int) timeNoPenalty%1000;
+
+        return dossard + "  " + firstName + "  " + lastName + "  " + country.substring(0, 3).toUpperCase() + "  " + String.format("%02d:%02d:%02d:%03d",hours,minutes,seconds,millis)+"," + 30000 * penalty;
     }
 
 
