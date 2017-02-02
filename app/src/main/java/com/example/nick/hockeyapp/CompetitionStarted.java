@@ -190,20 +190,27 @@ public class CompetitionStarted extends AppCompatActivity {
         });
     }
 
-    public void setPenalty0(){
-        currentAthlete.setPenalty(0);
+    public void addPenalty(View v){
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStarted.this);
+        final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
+
+       TextView w = ((TextView)promptView.findViewById(R.id.penaltyText));
+
+        TextView s = (TextView) promptView.findViewById(R.id.nomPenalty);
+        s.append("Mange La Bien");
+        int x = Integer.parseInt(w.getText().toString());
+        x++;
+        w.setText(x + "sucemoi");
+
     }
 
-    public void setPenalty1(){
-        currentAthlete.setPenalty(1);
+    public void removePenalty(View v){
+        TextView w = (TextView) v.findViewById(R.id.penaltyText);
+        int x = Integer.parseInt(w.getText().toString());
+        if(x > 0)
+            x--;
+        w.setText(Integer.toString(x));
     }
 
-    public void setPenalty2(){
-        currentAthlete.setPenalty(2);
-    }
-
-    public void setPenalty3(){
-        currentAthlete.setPenalty(3);
-    }
 
 }

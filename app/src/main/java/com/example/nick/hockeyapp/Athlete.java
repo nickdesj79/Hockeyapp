@@ -66,7 +66,7 @@ public class Athlete implements Serializable {
 
     public int getPenalty(){ return penalty; }
 
-    public void setPenalty(int penalty){ this.penalty = penalty; }
+    public void setPenalty(int penalty){ this.penalty = this.penalty + penalty; }
 
 
 
