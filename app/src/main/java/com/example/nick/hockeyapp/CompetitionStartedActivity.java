@@ -23,6 +23,10 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     ArrayList<Athlete> allPlayerList;
     ArrayList<String> allPlayerListString;
 
+
+    ArrayList<String> listeDeTousLesDescentesString;
+    ArrayList<Athlete> listeDeTousLesDescentes;
+
     ArrayList<Athlete> upcomingAthlete;
     ArrayList<String> upcomingAthleteStringList;
 
@@ -56,6 +60,16 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
         allPlayerListString = new ArrayList<>();
         sortedListAllAthlete = new ArrayList<>();
+
+        listeDeTousLesDescentesString = new ArrayList<>();
+        listeDeTousLesDescentes = new ArrayList<>();
+
+        for(int i=0; i<2;i++) {
+            for(int j = 0; j < allPlayerList.size();j++) {
+                listeDeTousLesDescentes.add(allPlayerList.get(j));
+                listeDeTousLesDescentesString.add(allPlayerList.get(j).toString());
+            }
+        }
 
         for (int i = 0; i < allPlayerList.size(); i++) {
             allPlayerListString.add(allPlayerList.get(i).toString());
@@ -95,6 +109,28 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
 
         upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
+    }
+
+    public void viewAllUpcomingAthlete(View v) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
+
+        alertDialogBuilder.setView(promptView);
+
+        listView = (ListView) promptView.findViewById(R.id.allPlayerListView);
+
+        ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,listeDeTousLesDescentesString
+        );
+
+        AlertDialog alert = alertDialogBuilder.create();
+
+
+        listView.setAdapter(allPlayerArrayAdapter);
+        alert.show();
     }
 
     public void start(View v) {
@@ -186,10 +222,11 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     }
 
     private void algorithmeTri(ArrayList<Athlete> allPlayerList) {
+
         Athlete temp;
         int x = allPlayerList.size();
 
-        for(int i = allPlayerList.size() - 1; i < 1; i++) {
+        for(int i = allPlayerList.size() - 1; i < allPlayerList.size(); i++) {
             for(int j = 0; j < i-1; j++) {
                 if(allPlayerList.get(j + 1).getTimeWithPenalty() < allPlayerList.get(j).getTimeWithPenalty() && allPlayerList.get(j + 1).getTimeWithPenalty() != 0) {
                     temp = allPlayerList.get(j + 1);
@@ -211,14 +248,16 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         }
         upcomingAthlete = new ArrayList<>();
         upcomingAthleteStringList = new ArrayList<>();
-        for (int i = currentPlayerPosition; i < currentPlayerPosition + 3; i++) {
-            if(i+1 > allPlayerList.size()){
-                upcomingAthlete.add(allPlayerList.get(nextPlayerOutOfBounds));
-                upcomingAthleteStringList.add(allPlayerList.get(nextPlayerOutOfBounds).toString());
-                nextPlayerOutOfBounds++;
-            } else {
-                upcomingAthlete.add(allPlayerList.get(i));
-                upcomingAthleteStringList.add(allPlayerList.get(i).toString());
+
+
+        updateTop3View();
+        updateAllLeaderBoardView();
+        listeDeTousLesDescentesString.remove(0);
+        listeDeTousLesDescentes.remove(0);
+        for(int i = 0; i < 3;i++) {
+            if(i < listeDeTousLesDescentesString.size()){
+                upcomingAthlete.add(listeDeTousLesDescentes.get(i));
+                upcomingAthleteStringList.add(listeDeTousLesDescentesString.get(i));
             }
         }
 
@@ -229,24 +268,48 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 upcomingAthleteStringList);
         upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
-        //-----------------------------------------------------------------------------
 
-        //set le textView du nouveau current player pour l'afficher
+
+
         TextView currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
-        currentPlayer.setText(upcomingAthleteStringList.get(0));
 
 
+        //all race has been done
+        if(listeDeTousLesDescentesString.size() == 0) {
+            showWinner();
+        } else {
+            currentAthlete = upcomingAthlete.get(0);
+            currentPlayer.setText(upcomingAthleteStringList.get(0));
+        }
+    }
 
-        upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
+    private void showWinner() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
 
-        //le nouveau current athlete devient le premier de la nouvelle liste.Puis on set sa view.
-        currentAthlete = upcomingAthlete.get(0);
-        currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
-        currentPlayer.setText(upcomingAthleteStringList.get(0));
+        ArrayList<String> medalList = new ArrayList<>();
+
+        medalList.add("Gold : "+sortedListAllAthlete.get(0));
+        medalList.add("Silver : "+sortedListAllAthlete.get(1));
+        medalList.add("Bronze : "+sortedListAllAthlete.get(2));
 
 
-        updateTop3View();
-        updateAllLeaderBoardView();
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
+
+        alertDialogBuilder.setView(promptView);
+
+        listView = (ListView) promptView.findViewById(R.id.allPlayerListView);
+
+        ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,medalList
+        );
+
+        AlertDialog alert = alertDialogBuilder.create();
+
+
+        listView.setAdapter(allPlayerArrayAdapter);
+        alert.show();
     }
 
     private void updateTop3View() {
