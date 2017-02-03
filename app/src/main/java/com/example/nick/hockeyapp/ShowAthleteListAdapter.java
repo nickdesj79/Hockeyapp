@@ -21,18 +21,15 @@ public class ShowAthleteListAdapter extends ArrayAdapter<Athlete> {
 
     public ShowAthleteListAdapter(Context context, int textViewRessourceId, ArrayList<Athlete> list) {
         super(context, textViewRessourceId, list);
-
         this.list = list;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewRessourceId = textViewRessourceId;
-
     }
-
-
 
     @Override
     public View getView(int position , View convertView, ViewGroup parent) {
-    convertView = inflater.inflate(viewRessourceId,null);
+
+        convertView = inflater.inflate(viewRessourceId,null);
 
         Athlete athlete = list.get(position);
 

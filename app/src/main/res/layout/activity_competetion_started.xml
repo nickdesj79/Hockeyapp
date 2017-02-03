@@ -122,5 +122,16 @@
         android:layout_marginBottom="11dp"
         android:id="@+id/chronometer1" />
 
+    <Button
+        android:text="Show all athletes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/showAthletesButton"
+        android:onClick="start"
+        android:layout_above="@+id/viewallplayerbutton"
+        android:layout_alignLeft="@+id/viewallplayerbutton"
+        android:layout_alignStart="@+id/viewallplayerbutton"
+        android:layout_marginBottom="11dp" />
+
 
 </RelativeLayout>

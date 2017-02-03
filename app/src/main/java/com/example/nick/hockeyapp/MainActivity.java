@@ -20,7 +20,7 @@ import java.util.ArrayList;
 //TODO: recevoir les medailles lorsque tout le monde est passé deux fois.
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView ;
+    ListView listView;
     ArrayList<Athlete> liste;
 
     private int player_number = 1;
@@ -32,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
         liste = new ArrayList<>();
 
-        Athlete athlete = new Athlete(player_number++, "Nicolas","Desjardins","Canada");
-        Athlete athlete2 = new Athlete(player_number++, "Jeremie","Desjardins","USA");
-        Athlete athlete3 = new Athlete(player_number++, "Marc-antoine","Roberge","Japon");
-        Athlete athlete4 = new Athlete(player_number++, "Vincent","Pageau","Chine");
-        Athlete athlete5 = new Athlete(player_number++, "Marc-antoine","Fortier","Pays-bas");
-        Athlete athlete6 = new Athlete(player_number++, "Vincent","Lamoureux","Pollande");
-        Athlete athlete7 = new Athlete(player_number++, "Frederique","Cardinal","Belgique");
-        Athlete athlete8 = new Athlete(player_number++, "louise","Therien","Mexique");
-        Athlete athlete9 = new Athlete(player_number++, "Kevin","Leroux","Cuba");
-        Athlete athlete10 = new Athlete(player_number++, "Alex","Walsh","Switzertland");
-        Athlete athlete11 = new Athlete(player_number++, "Samuel","Lim","Suisse");
+        Athlete athlete = new Athlete(player_number++, "Nicolas", "Desjardins", "Canada");
+        Athlete athlete2 = new Athlete(player_number++, "Jeremie", "Desjardins", "USA");
+        Athlete athlete3 = new Athlete(player_number++, "Marc-antoine", "Roberge", "Japon");
+        Athlete athlete4 = new Athlete(player_number++, "Vincent", "Pageau", "Chine");
+        Athlete athlete5 = new Athlete(player_number++, "Marc-antoine", "Fortier", "Pays-bas");
+        Athlete athlete6 = new Athlete(player_number++, "Vincent", "Lamoureux", "Pollande");
+        Athlete athlete7 = new Athlete(player_number++, "Frederique", "Cardinal", "Belgique");
+        Athlete athlete8 = new Athlete(player_number++, "louise", "Therien", "Mexique");
+        Athlete athlete9 = new Athlete(player_number++, "Kevin", "Leroux", "Cuba");
+        Athlete athlete10 = new Athlete(player_number++, "Alex", "Walsh", "Switzertland");
+        Athlete athlete11 = new Athlete(player_number++, "Samuel", "Lim", "Suisse");
 
         liste.add(athlete);
         liste.add(athlete2);
@@ -56,25 +56,18 @@ public class MainActivity extends AppCompatActivity {
         liste.add(athlete10);
         liste.add(athlete11);
 
+        listView = (ListView) findViewById(R.id.athleteList);
 
-
-
-        listView = (ListView) findViewById(R.id.listView);
-
-        ShowAthleteListAdapter adapter = new ShowAthleteListAdapter(this, R.layout.list_adapter_view,liste);
-
+        ShowAthleteListAdapter adapter = new ShowAthleteListAdapter(this, R.layout.list_adapter_view, liste);
         listView.setAdapter(adapter);
-
-
     }
 
     public void addAthlete(View v) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
-         final View promptView = layoutInflater.inflate(R.layout.add_athlete, null);
+        final View promptView = layoutInflater.inflate(R.layout.add_athlete, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setView(promptView);
-
 
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
@@ -90,9 +83,8 @@ public class MainActivity extends AppCompatActivity {
                         EditText etCountry = (EditText) promptView.findViewById(R.id.country);
                         String country = etCountry.getText().toString();
 
-                        Athlete athlete = new Athlete(player_number++, firstName,lastName,country);
+                        Athlete athlete = new Athlete(player_number++, firstName, lastName, country);
                         liste.add(athlete);
-
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -105,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-
     }
 
     public void startCompetition(View v) {
@@ -113,9 +104,6 @@ public class MainActivity extends AppCompatActivity {
         final View promptView = layoutInflater.inflate(R.layout.start_competition_alert, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setView(promptView);
-
-
-
 
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
@@ -127,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra("athleteList", liste);
                         startActivity(i);
                         finish();
-
-
                     }
                 })
                 .setNegativeButton("Cancel",

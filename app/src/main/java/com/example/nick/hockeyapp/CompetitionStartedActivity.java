@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.app.AlertDialog;
 import android.widget.TextView;
@@ -22,12 +21,11 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
     ArrayList<Athlete> allPlayerList;
     ArrayList<String> allPlayerListString;
-
+    ArrayList<Athlete> allPlayerListSorted;
     ArrayList<Athlete> upcomingAthlete;
     ArrayList<String> upcomingAthleteStringList;
-
     ArrayList<String> top3AthleteStringList;
-    ArrayList<Athlete> sortedListAllAthlete;
+
 
     ListView listView;
     ListView upcomingAthleteView;
@@ -47,23 +45,23 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.competetion_started_screen);
-
+        setContentView(R.layout.activity_competetion_started);
 
         chronometerView = (TextView) findViewById(R.id.chronometer1);
         context = this;
 
         allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
+        allPlayerListSorted = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
+        //TODO: vérifier si necessaire.
         allPlayerListString = new ArrayList<>();
-        sortedListAllAthlete = new ArrayList<>();
 
         for (int i = 0; i < allPlayerList.size(); i++) {
             allPlayerListString.add(allPlayerList.get(i).toString());
-            sortedListAllAthlete.add(allPlayerList.get(i));
         }
 
 
         //initialize initial incoming players lists
+        //TODO: verifier si necessaire.
         upcomingAthlete = new ArrayList<>();
         upcomingAthleteStringList = new ArrayList<>();
 
@@ -74,7 +72,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
             if (allPlayerList.get(i) != null) {
                 upcomingAthlete.add(allPlayerList.get(i));
                 upcomingAthleteStringList.add(allPlayerList.get(i).toString());
-
             }
         }
 
@@ -241,11 +238,11 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     private void updateTop3View() {
 
         top3AthleteStringList = new ArrayList<>();
-        algorithmeTri(sortedListAllAthlete);
+        algorithmeTri(allPlayerListSorted);
 
         for(int z = 0; z < 3;z++) {
-            if(sortedListAllAthlete.get(z).getTimeWithPenalty() != 0) {
-                top3AthleteStringList.add(sortedListAllAthlete.get(z).toString());
+            if(allPlayerListSorted.get(z).getTimeWithPenalty() != 0) {
+                top3AthleteStringList.add(allPlayerListSorted.get(z).toString());
             }
         }
 
