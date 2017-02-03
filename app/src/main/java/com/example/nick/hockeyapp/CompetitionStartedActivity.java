@@ -176,7 +176,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         alertDialogBuilder.setView(promptView);
 
         TextView tv = (TextView)promptView.findViewById(R.id.penaltyText);
-        tv.setText("0");
 
 
         // setup a dialog window
@@ -252,6 +251,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         upcomingAthleteStringList = new ArrayList<>();
 
 
+        algorithmeTri(sortedListAllAthlete);
         updateTop3View();
         updateAllLeaderBoardView();
         listeDeTousLesDescentesString.remove(0);
@@ -328,7 +328,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     private void updateTop3View() {
 
         top3AthleteStringList = new ArrayList<>();
-        algorithmeTri(sortedListAllAthlete);
 
         for(int z = 0; z < 3;z++) {
             if(sortedListAllAthlete.get(z).getTimeWithPenalty() != 0) {
