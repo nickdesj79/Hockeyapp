@@ -2,7 +2,9 @@ package com.example.nick.hockeyapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.print.PrintHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -310,6 +312,17 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         listView.setAdapter(allPlayerArrayAdapter);
         alert.show();
+
+        alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
     }
 
     private void updateTop3View() {
