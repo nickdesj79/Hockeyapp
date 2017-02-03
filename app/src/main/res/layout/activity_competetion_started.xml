@@ -123,6 +123,17 @@
         android:id="@+id/chronometer1" />
 
     <Button
+        android:text="View all upcoming race"
+        android:layout_width="400px"
+        android:layout_height="100px"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/allUpcomingRace"
+        android:layout_above="@+id/viewallplayerbutton"
+        android:layout_alignRight="@+id/viewallplayerbutton"
+        android:layout_alignEnd="@+id/viewallplayerbutton"
+        android:onClick="viewAllUpcomingAthlete"/>
+
+    <Button
         android:text="Show all athletes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
