@@ -162,8 +162,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         currentAthlete.addTime(currentTime);
 
         showPenaltyAlert();
-
-
     }
 
     public void showPenaltyAlert() {
@@ -223,7 +221,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         Athlete temp;
         int x = allPlayerList.size();
-
+        /*
         for(int i = allPlayerList.size() - 1; i < allPlayerList.size(); i++) {
             for(int j = 0; j < i-1; j++) {
                 if(allPlayerList.get(j + 1).getTimeWithPenalty() < allPlayerList.get(j).getTimeWithPenalty() && allPlayerList.get(j + 1).getTimeWithPenalty() != 0) {
@@ -233,6 +231,8 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                 }
             }
         }
+        */
+
     }
 
     public void goToNextPlayer() {
@@ -380,6 +380,18 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         w.setText(Integer.toString(x));
     }
 
+    public void didNotFinish(View v){
+        if (chrono != null) {
+            chrono.stop();
+            t.interrupt();
+            t = null;
+            chrono = null;
+        }
+
+        currentAthlete.setDidNotFinish(true);
+        goToNextPlayer();
+
+    }
 }
 
 
