@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
         Athlete athlete = new Athlete(player_number++, "Nicolas","Desjardins","Canada");
         Athlete athlete2 = new Athlete(player_number++, "Jeremie","Desjardins","USA");
         Athlete athlete3 = new Athlete(player_number++, "Marc-antoine","Roberge","Japon");
-       /* Athlete athlete4 = new Athlete(player_number++, "Vincent","Pageau","Chine");
-        Athlete athlete5 = new Athlete(player_number++, "Marc-antoine","Fortier","Pays-bas");*/
+        Athlete athlete4 = new Athlete(player_number++, "Vincent","Pageau","Chine");
+        Athlete athlete5 = new Athlete(player_number++, "Marc-antoine","Fortier","Pays-bas");
 
         liste.add(athlete);
         liste.add(athlete2);
         liste.add(athlete3);
-       /* liste.add(athlete4);
-        liste.add(athlete5);*/
+        liste.add(athlete4);
+        liste.add(athlete5);
 
         listView = (ListView) findViewById(R.id.athleteList);
 

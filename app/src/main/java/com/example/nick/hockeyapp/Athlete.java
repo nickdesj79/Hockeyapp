@@ -13,7 +13,6 @@ public class Athlete implements Serializable {
     private String country;
     private int dossard;
     private double timeNoPenalty = 0;
-    private String total_time = "-";
     private int penalty;
     private boolean disqualified = false;
     private boolean dnf = false;
@@ -56,6 +55,10 @@ public class Athlete implements Serializable {
 
     public void setTimeNoPenalty(double time) {
         this.timeNoPenalty = time;
+    }
+
+    public boolean isDnf() {
+        return this.dnf;
     }
 
     public void addTime(double time) {
@@ -102,11 +105,11 @@ public class Athlete implements Serializable {
 
         if (disqualified) {
             return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - DISQUALIFIED";
-        } else if (getTimeWithPenalty() == 0) {
+        }else if (dnf) {
+            return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - DNF";
+        }  else if (getTimeWithPenalty() == 0) {
             return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - NA";
-        } else if (dnf) {
-            return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - Did not finish";
-        } else {
+        }  else {
             return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - " + String.format("%02d:%02d:%02d:%03d", hours, minutes, seconds, millis);
         }
     }
