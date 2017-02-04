@@ -58,6 +58,10 @@ public class Athlete implements Serializable {
         this.timeNoPenalty = time;
     }
 
+    public boolean getDidNotFinish(){
+        return dnf;
+    }
+
     public void addTime(double time) {
         this.timeNoPenalty += time;
     }
@@ -84,6 +88,7 @@ public class Athlete implements Serializable {
 
     public void setDidNotFinish(boolean etat) {
         this.dnf = true;
+        this.disqualified = true;
     }
 
     public String toMenuString() {
