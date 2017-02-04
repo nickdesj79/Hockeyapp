@@ -127,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/showAthletesButton"
-        android:onClick=""
+        android:onClick="showAllAthlete"
         android:layout_above="@+id/viewallplayerbutton"
         android:layout_alignLeft="@+id/viewallplayerbutton"
         android:layout_alignStart="@+id/viewallplayerbutton"
