@@ -123,17 +123,6 @@
         android:id="@+id/chronometer1" />
 
     <Button
-        android:text="View all upcoming race"
-        android:layout_width="400px"
-        android:layout_height="100px"
-        android:layout_marginBottom="12dp"
-        android:id="@+id/allUpcomingRace"
-        android:layout_above="@+id/viewallplayerbutton"
-        android:layout_alignRight="@+id/viewallplayerbutton"
-        android:layout_alignEnd="@+id/viewallplayerbutton"
-        android:onClick="viewAllUpcomingAthlete"/>
-
-    <Button
         android:text="Show all athletes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -143,6 +132,26 @@
         android:layout_alignLeft="@+id/viewallplayerbutton"
         android:layout_alignStart="@+id/viewallplayerbutton"
         android:layout_marginBottom="11dp" />
+
+    <Button
+        android:text="View all upcoming race"
+        android:layout_width="400px"
+        android:layout_height="100px"
+        android:id="@+id/allUpcomingRace"
+        android:onClick="viewAllUpcomingAthlete"
+        android:layout_below="@+id/currentPlayer"
+        android:layout_alignLeft="@+id/showAthletesButton"
+        android:layout_alignStart="@+id/showAthletesButton" />
+
+    <Button
+        android:text="Did not finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_marginBottom="13dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
 
 </RelativeLayout>
