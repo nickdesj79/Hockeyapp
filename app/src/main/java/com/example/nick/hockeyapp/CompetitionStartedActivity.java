@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class CompetitionStartedActivity extends AppCompatActivity {
 
     ArrayList<Athlete> allPlayerList;
+    ArrayList<String> allPlayerListStringNotSorted;
     ArrayList<String> allPlayerListString;
     ArrayList<Athlete> sortedAllPlayerList;
 
@@ -63,6 +64,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         listeDeTousLesDescentesString = new ArrayList<>();
         listeDeTousLesDescentes = new ArrayList<>();
+        allPlayerListStringNotSorted = new ArrayList<>();
 
         for(int i=0; i<2;i++) {
             for(int j = 0; j < allPlayerList.size();j++) {
@@ -73,6 +75,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         for (int i = 0; i < allPlayerList.size(); i++) {
             allPlayerListString.add(allPlayerList.get(i).toString());
+            allPlayerListStringNotSorted.add(allPlayerList.get(i).toMenuString());
         }
 
 
@@ -132,6 +135,28 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         alert.show();
     }
 
+    public void ShowALlAthlete(View v) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
+
+        alertDialogBuilder.setView(promptView);
+
+        listView = (ListView) promptView.findViewById(R.id.allPlayerListView);
+
+        ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,allPlayerListStringNotSorted
+        );
+
+        AlertDialog alert = alertDialogBuilder.create();
+
+
+        listView.setAdapter(allPlayerArrayAdapter);
+        alert.show();
+    }
+
     public void start(View v) {
 
         if (chrono == null) {
@@ -181,8 +206,11 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                         //LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
                         //final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
                         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
-                        int x = Integer.parseInt(w.getText().toString());
-                        currentAthlete.setPenalty(x);
+                        if(!w.getText().toString().isEmpty()) {
+                            int x = Integer.parseInt(w.getText().toString());
+                            currentAthlete.setPenalty(x);
+                        }
+
 
                         goToNextPlayer();
                     }
