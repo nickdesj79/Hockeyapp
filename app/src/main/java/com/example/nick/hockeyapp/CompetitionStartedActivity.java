@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.print.PrintHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.app.AlertDialog;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
     ArrayList<Athlete> allPlayerList;
     ArrayList<String> allPlayerListString;
-    ArrayList<Athlete> allPlayerListSorted;
+    ArrayList<Athlete> sortedAllPlayerList;
 
 
     ArrayList<String> listeDeTousLesDescentesString;
@@ -59,7 +57,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         context = this;
 
         allPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
-        allPlayerListSorted = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
+        sortedAllPlayerList = (ArrayList<Athlete>) getIntent().getSerializableExtra("athleteList");
         //TODO: vérifier si necessaire.
         allPlayerListString = new ArrayList<>();
 
@@ -250,7 +248,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         upcomingAthleteStringList = new ArrayList<>();
 
 
-        algorithmeTri(sortedListAllAthlete);
+        algorithmeTri(sortedAllPlayerList);
         updateTop3View();
         updateAllLeaderBoardView();
         listeDeTousLesDescentesString.remove(0);
@@ -289,9 +287,9 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         ArrayList<String> medalList = new ArrayList<>();
 
-        medalList.add("Gold : "+sortedListAllAthlete.get(0));
-        medalList.add("Silver : "+sortedListAllAthlete.get(1));
-        medalList.add("Bronze : "+sortedListAllAthlete.get(2));
+        medalList.add("Gold : "+sortedAllPlayerList.get(0));
+        medalList.add("Silver : "+sortedAllPlayerList.get(1));
+        medalList.add("Bronze : "+sortedAllPlayerList.get(2));
 
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
@@ -327,11 +325,11 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     private void updateTop3View() {
 
         top3AthleteStringList = new ArrayList<>();
-        algorithmeTri(allPlayerListSorted);
+        algorithmeTri(sortedAllPlayerList);
 
         for(int z = 0; z < 3;z++) {
-            if(allPlayerListSorted.get(z).getTimeWithPenalty() != 0) {
-                top3AthleteStringList.add(allPlayerListSorted.get(z).toString());
+            if(sortedAllPlayerList.get(z).getTimeWithPenalty() != 0) {
+                top3AthleteStringList.add(sortedAllPlayerList.get(z).toString());
             }
         }
 
@@ -349,8 +347,8 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         allPlayerListString = new ArrayList<>();
 
-        for (int i = 0; i < sortedListAllAthlete.size(); i++) {
-            allPlayerListString.add(sortedListAllAthlete.get(i).toString());
+        for (int i = 0; i < sortedAllPlayerList.size(); i++) {
+            allPlayerListString.add(sortedAllPlayerList.get(i).toString());
         }
     }
 
