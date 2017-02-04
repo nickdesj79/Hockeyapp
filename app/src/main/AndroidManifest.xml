@@ -8,15 +8,15 @@
         android:label="Slalom leaderboards"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:screenOrientation="landscape" android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".CompetitionStartedActivity"></activity>
+        <activity android:screenOrientation="landscape" android:name=".MainActivity"></activity>
+        <activity android:screenOrientation="landscape" android:name=".CompetitionStartedActivity"></activity>
     </application>
 
 </manifest>
