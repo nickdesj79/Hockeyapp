@@ -135,7 +135,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public void ShowALlAthlete(View v) {
+    public void ShowAllAthlete(View v) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
