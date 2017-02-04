@@ -4,21 +4,6 @@
     android:layout_height="match_parent">
 
 
-    <Button
-        android:text="View all leaderboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="42dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="35dp"
-        android:id="@+id/viewallplayerbutton"
-        android:onClick="ViewAllPlayer"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/upcomingPlayer"
-        android:layout_alignStart="@+id/upcomingPlayer" />
-
-
-
     <ListView
         android:layout_width="700px"
         android:layout_height="370px"
@@ -64,63 +49,15 @@
 
 
     <Button
-        android:text="Stop"
+        android:text="View all leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/stop"
-        android:layout_above="@+id/viewallplayerbutton"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:onClick="stop"/>
-
-    <Button
-        android:text="Start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/start"
-        android:layout_marginRight="84dp"
-        android:layout_marginEnd="84dp"
-        android:layout_alignBaseline="@+id/stop"
-        android:layout_alignBottom="@+id/stop"
-        android:layout_toLeftOf="@+id/stop"
-        android:layout_toStartOf="@+id/stop"
-        android:onClick="start"/>
-
-    <TextView
-        android:text="Current Player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="22sp"
-        android:layout_marginBottom="85dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_above="@+id/stop"
-        android:layout_alignLeft="@+id/topplayer"
-        android:layout_alignStart="@+id/topplayer" />
-
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/upcomingPlayer"
-        android:layout_toEndOf="@+id/upcomingPlayer"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginBottom="24dp"
-        android:id="@+id/currentPlayer" />
-
-    <Chronometer
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/start"
-        android:layout_toRightOf="@+id/currentPlayer"
-        android:layout_toEndOf="@+id/currentPlayer"
-        android:layout_marginLeft="72dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginBottom="11dp"
-        android:id="@+id/chronometer1" />
+        android:id="@+id/viewallplayerbutton"
+        android:onClick="ViewAllPlayer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/upcomingPlayer"
+        android:layout_alignStart="@+id/upcomingPlayer"
+        android:layout_marginBottom="23dp" />
 
     <Button
         android:text="Show all athletes"
@@ -139,20 +76,71 @@
         android:layout_height="100px"
         android:id="@+id/allUpcomingRace"
         android:onClick="viewAllUpcomingAthlete"
-        android:layout_below="@+id/currentPlayer"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/showAthletesButton"
         android:layout_alignLeft="@+id/showAthletesButton"
         android:layout_alignStart="@+id/showAthletesButton" />
 
     <Button
-        android:text="Did not finish"
+        android:text="Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/start"
+        android:onClick="start"
+        android:layout_marginTop="475dp"
+        android:layout_marginLeft="625dp"
+         />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer1"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="755dp"
+        android:layout_below="@+id/textView3"
+
+         />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/currentPlayer"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="-175dp"/>
+
+    <TextView
+        android:text="Current Player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="22sp"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="700dp"/>
+
+    <Button
+        android:text="Did not finish"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_marginBottom="13dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:onClick="didNotFinish"/>
+        android:onClick="didNotFinish"
+        android:layout_below="@+id/stop"
+        android:layout_toRightOf="@+id/start"
+        android:layout_toEndOf="@+id/start"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:text="Stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stop"
+        android:onClick="stop"
+        android:layout_alignBottom="@+id/start"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
 
 
 </RelativeLayout>
