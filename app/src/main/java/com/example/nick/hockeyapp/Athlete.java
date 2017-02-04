@@ -79,6 +79,11 @@ public class Athlete implements Serializable {
         this.penalty = penalty;
     }
 
+    public String toMenuString() {
+        return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase();
+    }
+
+
     public String toString() {
 
         double time = getTimeWithPenalty();
