@@ -104,12 +104,12 @@ public class Athlete implements Serializable {
         int millis = (int) time % 1000;
 
 
-        if (disqualified) {
-            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - DISQUALIFIED";
+        if (dnf) {
+            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - Did not finish";
         } else if (getTimeWithPenalty() == 0) {
             return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - NA";
-        } else if (dnf) {
-            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - Did not finish";
+        } else if (disqualified) {
+            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - DISQUALIFIED";
         } else {
             return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - " + String.format("%02d:%02d:%02d:%03d", hours, minutes, seconds, millis);
         }
