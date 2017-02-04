@@ -303,7 +303,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         if(listeDeTousLesDescentesString.size() == 0) {
             showWinner();
         } else {
-            if(currentAthlete.isDnf()) {
+            if(currentAthlete.getDidNotFinish()) {
 
                 for (int i = 0; i < listeDeTousLesDescentes.size();i++) {
                     if(listeDeTousLesDescentes.get(i).getDossard() == currentAthlete.getDossard()) {
