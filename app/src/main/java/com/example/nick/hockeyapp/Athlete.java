@@ -13,7 +13,6 @@ public class Athlete implements Serializable {
     private String country;
     private int dossard;
     private double timeNoPenalty = 0;
-    private String total_time = "-";
     private int penalty;
     private boolean disqualified = false;
     private boolean dnf = false;

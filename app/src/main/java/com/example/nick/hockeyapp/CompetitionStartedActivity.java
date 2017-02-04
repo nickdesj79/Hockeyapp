@@ -250,26 +250,22 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     private void algorithmeTri(ArrayList<Athlete> allPlayerList) {
 
         Athlete temp;
-        int x = allPlayerList.size();
-        /*
-        for(int i = allPlayerList.size() - 1; i < allPlayerList.size(); i++) {
-            for(int j = 0; j < i-1; j++) {
-                if(allPlayerList.get(j + 1).getTimeWithPenalty() < allPlayerList.get(j).getTimeWithPenalty() && allPlayerList.get(j + 1).getTimeWithPenalty() != 0) {
+
+        for(int i = allPlayerList.size() - 2; i < allPlayerList.size(); i++) {
+            for(int j = 0; j < allPlayerList.size() - 1; j--) {
+                if(allPlayerList.get(j).getTimeWithPenalty() < allPlayerList.get(j-1).getTimeWithPenalty()) {
                     temp = allPlayerList.get(j + 1);
                     allPlayerList.set(j + 1, allPlayerList.get(j));
                     allPlayerList.set(j, temp);
                 }
             }
         }
-        */
-
     }
 
     public void goToNextPlayer() {
 
 
         //Augmente la position du prochaine joueur et update la liste de upcoming players.
-        int nextPlayerOutOfBounds = 0;
         currentPlayerPosition++;
         if(currentPlayerPosition==allPlayerList.size()) {
             currentPlayerPosition = 0;
@@ -307,6 +303,17 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         if(listeDeTousLesDescentesString.size() == 0) {
             showWinner();
         } else {
+            if(currentAthlete.isDnf()) {
+
+                for (int i = 0; i < listeDeTousLesDescentes.size();i++) {
+                    if(listeDeTousLesDescentes.get(i).getDossard() == currentAthlete.getDossard()) {
+                        listeDeTousLesDescentesString.remove(i);
+                        listeDeTousLesDescentes.remove(i);
+                        i--;
+                    }
+                }
+
+            }
             lastAthlete = currentAthlete;
             currentAthlete = upcomingAthlete.get(0);
             currentPlayer.setText(upcomingAthleteStringList.get(0));
@@ -393,7 +400,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         });
     }
 
-    public void didNotFinish(View v){
+    public void didNotFinish(View v) {
         if (chrono != null) {
             chrono.stop();
             t.interrupt();
@@ -404,7 +411,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         currentAthlete.setDidNotFinish(true);
         goToNextPlayer();
     }
-
     public void showLastAthleteAlert(){
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.popup_show_last_athlete, null);
