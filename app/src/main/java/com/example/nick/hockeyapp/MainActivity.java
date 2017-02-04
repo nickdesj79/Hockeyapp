@@ -18,6 +18,7 @@ import java.util.ArrayList;
 //TODO: permettre d'afficher la liste complete des athletes qui participent.
 //TODO: remettre au premier lorsque tout le monde a fait le parcours.
 //TODO: recevoir les medailles lorsque tout le monde est passé deux fois.
+//TODO: regler le tri.
 public class MainActivity extends AppCompatActivity {
 
     ListView listView ;

@@ -105,13 +105,13 @@ public class Athlete implements Serializable {
 
 
         if (disqualified) {
-            return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - DISQUALIFIED";
+            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - DISQUALIFIED";
         } else if (getTimeWithPenalty() == 0) {
-            return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - NA";
+            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - NA";
         } else if (dnf) {
-            return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - Did not finish";
+            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - Did not finish";
         } else {
-            return dossard + " - " + firstName + "  " + lastName + " - " + country.substring(0, 3).toUpperCase() + " - " + String.format("%02d:%02d:%02d:%03d", hours, minutes, seconds, millis);
+            return firstName + "  " + lastName + " - " + dossard + " - " + country.substring(0, 3).toUpperCase() + " - " + String.format("%02d:%02d:%02d:%03d", hours, minutes, seconds, millis);
         }
     }
 

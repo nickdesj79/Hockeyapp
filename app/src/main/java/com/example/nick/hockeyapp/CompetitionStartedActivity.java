@@ -67,8 +67,8 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         listeDeTousLesDescentes = new ArrayList<>();
         allPlayerListStringNotSorted = new ArrayList<>();
 
-        for(int i=0; i<2;i++) {
-            for(int j = 0; j < allPlayerList.size();j++) {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < allPlayerList.size(); j++) {
                 listeDeTousLesDescentes.add(allPlayerList.get(j));
                 listeDeTousLesDescentesString.add(allPlayerList.get(j).toString());
             }
@@ -106,7 +106,6 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                 upcomingAthleteStringList);
 
 
-
         TextView currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
         currentPlayer.setText(upcomingAthleteStringList.get(0));
 
@@ -126,7 +125,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,listeDeTousLesDescentesString
+                android.R.layout.simple_list_item_1, listeDeTousLesDescentesString
         );
 
         AlertDialog alert = alertDialogBuilder.create();
@@ -148,7 +147,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,allPlayerListStringNotSorted
+                android.R.layout.simple_list_item_1, allPlayerListStringNotSorted
         );
 
         AlertDialog alert = alertDialogBuilder.create();
@@ -196,7 +195,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
         alertDialogBuilder.setView(promptView);
 
-        TextView tv = (TextView)promptView.findViewById(R.id.penaltyText);
+        TextView tv = (TextView) promptView.findViewById(R.id.penaltyText);
 
 
         // setup a dialog window
@@ -207,7 +206,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
                         //LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
                         //final View promptView = layoutInflater.inflate(R.layout.penalty_popup, null);
                         TextView w = ((TextView) promptView.findViewById(R.id.penaltyText));
-                        if(!w.getText().toString().isEmpty()) {
+                        if (!w.getText().toString().isEmpty()) {
                             int x = Integer.parseInt(w.getText().toString());
                             currentAthlete.setPenalty(x);
                         }
@@ -226,7 +225,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     public void ViewAllPlayer(View v) {
 
 
-       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.show_all_athlete_competition, null);
@@ -237,8 +236,8 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,allPlayerListString
-                 );
+                android.R.layout.simple_list_item_1, allPlayerListString
+        );
 
         AlertDialog alert = alertDialogBuilder.create();
 
@@ -247,16 +246,19 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private void algorithmeTri(ArrayList<Athlete> allPlayerList) {
+    private void algorithmeTri(ArrayList<Athlete> playerList) {
 
         Athlete temp;
+        double tempsMin;
+        boolean aChange = true;
 
-        for(int i = allPlayerList.size() - 2; i < allPlayerList.size(); i++) {
-            for(int j = 0; j < allPlayerList.size() - 1; j--) {
-                if(allPlayerList.get(j).getTimeWithPenalty() < allPlayerList.get(j-1).getTimeWithPenalty()) {
-                    temp = allPlayerList.get(j + 1);
-                    allPlayerList.set(j + 1, allPlayerList.get(j));
-                    allPlayerList.set(j, temp);
+        for(int j=0; j< playerList.size(); j++) {
+
+            for (int i = 0; i < playerList.size() - 1; i++) {
+                if ((playerList.get(i).getTimeWithPenalty() > playerList.get(i+1).getTimeWithPenalty() && playerList.get(i+1).getTimeWithPenalty() != 0)|| (playerList.get(i).getTimeWithPenalty() == 0 || playerList.get(i).getDisqualified())) {
+                    temp = playerList.get(i + 1);
+                    playerList.set(i + 1, playerList.get(i));
+                    playerList.set(i, temp);
                 }
             }
         }
@@ -267,7 +269,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         //Augmente la position du prochaine joueur et update la liste de upcoming players.
         currentPlayerPosition++;
-        if(currentPlayerPosition==allPlayerList.size()) {
+        if (currentPlayerPosition == allPlayerList.size()) {
             currentPlayerPosition = 0;
         }
         upcomingAthlete = new ArrayList<>();
@@ -279,8 +281,8 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         updateAllLeaderBoardView();
         listeDeTousLesDescentesString.remove(0);
         listeDeTousLesDescentes.remove(0);
-        for(int i = 0; i < 3;i++) {
-            if(i < listeDeTousLesDescentesString.size()){
+        for (int i = 0; i < 3; i++) {
+            if (i < listeDeTousLesDescentesString.size()) {
                 upcomingAthlete.add(listeDeTousLesDescentes.get(i));
                 upcomingAthleteStringList.add(listeDeTousLesDescentesString.get(i));
             }
@@ -295,18 +297,17 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         upcomingAthleteView.setAdapter(incomingPlayerArrayAdapter);
 
 
-
         TextView currentPlayer = (TextView) this.findViewById(R.id.currentPlayer);
 
 
         //all race has been done
-        if(listeDeTousLesDescentesString.size() == 0) {
+        if (listeDeTousLesDescentesString.size() == 0) {
             showWinner();
         } else {
-            if(currentAthlete.getDidNotFinish()) {
+            if (currentAthlete.getDidNotFinish()) {
 
-                for (int i = 0; i < listeDeTousLesDescentes.size();i++) {
-                    if(listeDeTousLesDescentes.get(i).getDossard() == currentAthlete.getDossard()) {
+                for (int i = 0; i < listeDeTousLesDescentes.size(); i++) {
+                    if (listeDeTousLesDescentes.get(i).getDossard() == currentAthlete.getDossard()) {
                         listeDeTousLesDescentesString.remove(i);
                         listeDeTousLesDescentes.remove(i);
                         i--;
@@ -325,9 +326,9 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         ArrayList<String> medalList = new ArrayList<>();
 
-        medalList.add("Gold : "+sortedAllPlayerList.get(0));
-        medalList.add("Silver : "+sortedAllPlayerList.get(1));
-        medalList.add("Bronze : "+sortedAllPlayerList.get(2));
+        medalList.add("Gold : " + sortedAllPlayerList.get(0));
+        medalList.add("Silver : " + sortedAllPlayerList.get(1));
+        medalList.add("Bronze : " + sortedAllPlayerList.get(2));
 
 
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
@@ -339,7 +340,7 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         ArrayAdapter<String> allPlayerArrayAdapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,medalList
+                android.R.layout.simple_list_item_1, medalList
         );
 
         AlertDialog alert = alertDialogBuilder.create();
@@ -363,11 +364,10 @@ public class CompetitionStartedActivity extends AppCompatActivity {
     private void updateTop3View() {
 
         top3AthleteStringList = new ArrayList<>();
-        algorithmeTri(sortedAllPlayerList);
 
-        for(int z = 0; z < 3;z++) {
-            if(sortedAllPlayerList.get(z).getTimeWithPenalty() != 0) {
-                top3AthleteStringList.add(sortedAllPlayerList.get(z).toString());
+        for (int z = 0; z < 3; z++) {
+            if (sortedAllPlayerList.get(z).getTimeWithPenalty() != 0) {
+                top3AthleteStringList.add(z + 1 + " - " + sortedAllPlayerList.get(z).toString());
             }
         }
 
@@ -411,13 +411,14 @@ public class CompetitionStartedActivity extends AppCompatActivity {
         currentAthlete.setDidNotFinish(true);
         goToNextPlayer();
     }
-    public void showLastAthleteAlert(){
+
+    public void showLastAthleteAlert() {
         LayoutInflater layoutInflater = LayoutInflater.from(CompetitionStartedActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.popup_show_last_athlete, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CompetitionStartedActivity.this);
         alertDialogBuilder.setView(promptView);
 
-        TextView athlete = (TextView)promptView.findViewById(R.id.athlete);
+        TextView athlete = (TextView) promptView.findViewById(R.id.athlete);
         ListView top3 = (ListView) promptView.findViewById(R.id.firstThree);
 
         ArrayAdapter<String> top3ArrayAdapter = new ArrayAdapter<String>(
@@ -427,15 +428,15 @@ public class CompetitionStartedActivity extends AppCompatActivity {
 
         top3.setAdapter(top3ArrayAdapter);
         int position = 0;
-        for(int i = 0 ; i< sortedAllPlayerList.size(); i++){
-            if (sortedAllPlayerList.get(i).getDossard() == lastAthlete.getDossard()){
-                position = i+1;
+        for (int i = 0; i < sortedAllPlayerList.size(); i++) {
+            if (sortedAllPlayerList.get(i).getDossard() == lastAthlete.getDossard()) {
+                position = i + 1;
             }
         }
-        if(lastAthlete.getDisqualified() || lastAthlete.getDidNotFinish()){
-            athlete.setText(lastAthlete.getFirstName() + " " +  lastAthlete.getLastName() + " DISQUALIFIED");
-        }else {
-            athlete.setText(lastAthlete.getFirstName() + " " + lastAthlete.getLastName() + " Position: " + position);
+        if (lastAthlete.getDisqualified() || lastAthlete.getDidNotFinish()) {
+            athlete.setText(lastAthlete.getFirstName() + " " + lastAthlete.getLastName() + " DISQUALIFIED");
+        } else {
+            athlete.setText("Position: " + position + " - " + lastAthlete.getFirstName() + " " + lastAthlete.getLastName());
         }
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
