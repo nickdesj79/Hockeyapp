@@ -5,21 +5,26 @@
 
     <TextView
         android:text="Last Athlete:"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lastAthlete" />
+        android:layout_marginLeft="180dp"
+        android:id="@+id/lastAthlete"
+        android:textStyle="bold"
+        />
 
     <TextView
-        android:hint="Nom..."
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="125dp"
         android:id="@+id/athlete" />
 
     <TextView
         android:text="Top 3:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/topThree" />
+        android:layout_marginLeft="198dp"
+        android:id="@+id/topThree"
+        android:textStyle="bold"/>
 
     <ListView
         android:layout_width="match_parent"

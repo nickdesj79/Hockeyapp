@@ -50,25 +50,25 @@
 
     <Button
         android:text="View all leaderboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400px"
+        android:layout_height="100px"
         android:id="@+id/viewallplayerbutton"
         android:onClick="ViewAllPlayer"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="570dp"
         android:layout_alignLeft="@+id/upcomingPlayer"
         android:layout_alignStart="@+id/upcomingPlayer"
-        android:layout_marginBottom="23dp" />
+         />
 
     <Button
         android:text="Show all athletes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400px"
+        android:layout_height="100px"
         android:id="@+id/showAthletesButton"
         android:onClick="showAllAthlete"
-        android:layout_above="@+id/viewallplayerbutton"
+        android:layout_marginTop="510dp"
         android:layout_alignLeft="@+id/viewallplayerbutton"
         android:layout_alignStart="@+id/viewallplayerbutton"
-        android:layout_marginBottom="11dp" />
+         />
 
     <Button
         android:text="View all upcoming race"
@@ -76,8 +76,7 @@
         android:layout_height="100px"
         android:id="@+id/allUpcomingRace"
         android:onClick="viewAllUpcomingAthlete"
-        android:layout_marginBottom="15dp"
-        android:layout_above="@+id/showAthletesButton"
+        android:layout_marginTop="450dp"
         android:layout_alignLeft="@+id/showAthletesButton"
         android:layout_alignStart="@+id/showAthletesButton" />
 
